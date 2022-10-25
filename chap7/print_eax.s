@@ -1,14 +1,15 @@
   ; eax を出力
 ndigit: equ 10
   section .text
-  global  ptint_eax
+  global  print_eax
+
 print_eax:
-  push eax
   push ebx
   push ecx
   push edx
   push edi
   push esi
+  push eax
 
   ; eaxの桁数をカウント
   mov edi,  10   ; 割る数
@@ -47,11 +48,11 @@ loop0:
   int 0x80
 
   pop eax
-  pop ebx
-  pop ecx
-  pop edx
-  pop edi
   pop esi
+  pop edi
+  pop edx
+  pop ecx
+  pop ebx
   ret
 
 
