@@ -72,3 +72,4 @@
 *.brf
 *.run.xml
 test*
+*.sh
