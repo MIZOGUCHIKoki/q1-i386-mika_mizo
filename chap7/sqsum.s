@@ -13,7 +13,7 @@ loop0:
 	mov edx, 0
 	mov eax, ecx
 	cmp ecx, ebx
-	je end
+	jg end
 	mul ecx
 	inc ecx
 	add eax, esi
