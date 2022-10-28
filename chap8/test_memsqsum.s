@@ -59,7 +59,7 @@ end:
 
 data1:	dd 1, 2, 3, 4, 5
 ndata1:	equ ($ - data1) / 4
-data2:	dd 
+data2:	dd 0
 ndata2:	equ ($ - data2) / 4
 data3:	dd 1, 1, 2, 4, 8 ,13
 ndata3:	equ ($ - data3) / 4
