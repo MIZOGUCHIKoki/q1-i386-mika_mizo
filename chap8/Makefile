@@ -11,7 +11,7 @@ test_memsqsum: test_memsqsum.o memsqsum.o
 .PHONY: clean test
 
 clean:
-	rm -f *.o *~ *.out
+	rm -f *.o *~ *.out test_memsqsum
 
 test: test_memsqsum
 	./test_memsqsum
