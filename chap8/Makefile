@@ -8,14 +8,14 @@ test_memsqsum: test_memsqsum.o print_eax.o
 memsqsum: memsqsum.o print_eax.o
 	$(LD) $(LDFLAGS) $+ -o $@
 
-
 %.o: %.s
 	$(AS) $<
 
 .PHONY: clean test
 
 clean:
-	rm -f *.o *~ a.out
+	rm -f *.o *~ *.out
 
 test: memsqsum test_memsqsum
 	./text_memsqsum
+	make clean
