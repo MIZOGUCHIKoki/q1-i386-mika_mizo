@@ -40,7 +40,7 @@ next3:
 	mov eax, 0
 	mov ebx, data4
 	mov ecx, ndata4
-	mov edx, 65536
+	mov edx, 0
 	call memsqsum
 	cmp eax, edx
 	je next4
@@ -74,7 +74,7 @@ data2:	dd
 ndata2:	equ ($ - data2) / 4
 data3:	dd 1, 1, 2, 4, 8 ,13
 ndata3:	equ ($ - data3) / 4
-data4:  times 65536 dd 1
+data4:  times 65536 dd 0
 ndata4:	equ ($ - data4) / 4
 data5:	dd 0, 0, 0
 ndata5:	equ ($ - data5) / 4
