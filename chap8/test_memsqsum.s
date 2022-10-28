@@ -4,20 +4,16 @@
 
 
 _start:
-	mov edi, 0
-	mov esi, 0
 	mov eax, 0
 	mov ebx, data1
 	mov ecx, ndata1
 	mov edx, 4294836225
 	call memsqsum
 	cmp eax, edx
-	je next
-	mov ebx, 1
-	jmp end
+  jne nif
 
 next:
-	mov eax, 0
+	mov eax, 12
 	mov ebx, data2
 	mov ecx, ndata2
 	mov edx, 0
