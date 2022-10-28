@@ -7,10 +7,10 @@ _start:
 	mov eax, 0
 	mov ebx, data1
 	mov ecx, ndata1
-	mov edx, 4294967295
+	mov edx, 4294836225
 	call memsqsum
 	cmp eax, edx
-	jb next
+	je next
 	mov ebx, 1
 	jmp end
 
