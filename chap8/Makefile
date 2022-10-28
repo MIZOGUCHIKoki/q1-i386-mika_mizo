@@ -17,5 +17,5 @@ clean:
 	rm -f *.o *~ *.out
 
 test: memsqsum test_memsqsum
-	./text_memsqsum
+	./test_memsqsum
 	make clean
