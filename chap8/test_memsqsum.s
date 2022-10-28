@@ -7,10 +7,10 @@ _start:
 	mov eax, 0
 	mov ebx, data1
 	mov ecx, ndata1
-	mov edx, 55
+	mov edx, 4294967295
 	call memsqsum
 	cmp eax, edx
-	je next
+	jb next
 	mov ebx, 1
 	jmp end
 
@@ -68,7 +68,7 @@ end:
 
 
 
-data1:	dd 1, 2, 0, 3, 4, 5
+data1:	dd 65535
 ndata1:	equ ($ - data1) / 4
 data2:	dd 
 ndata2:	equ ($ - data2) / 4
