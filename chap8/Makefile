@@ -5,9 +5,6 @@ LDFLAGS = -m elf_i386
 test_memsqsum: test_memsqsum.o memsqsum.o
 	$(LD) $(LDFLAGS) $+ -o $@
 
-memsqsum: memsqsum.o test_memsqsum.o
-	$(LD) $(LDFLAGS) $+ -o $@
-
 %.o: %.s
 	$(AS) $<
 
@@ -16,6 +13,6 @@ memsqsum: memsqsum.o test_memsqsum.o
 clean:
 	rm -f *.o *~ *.out
 
-test: memsqsum test_memsqsum
+test: test_memsqsum
 	./test_memsqsum
 	make clean
