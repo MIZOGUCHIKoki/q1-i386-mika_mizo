@@ -1,7 +1,6 @@
 	section .text
 	global _start
 	extern memsqsum
-	extern print_eax
 
 
 _start:
@@ -9,7 +8,6 @@ _start:
 	mov ecx, ndata1
 	mov edx, 55
 	call memsqsum
-	call print_eax
 	cmp eax, edx
 	je next
 	mov ebx, 1
@@ -20,7 +18,6 @@ next:
 	mov ecx, ndata2
 	mov edx, 0
 	call memsqsum
-	call print_eax
 	cmp eax, edx
 	je next2
 	mov ebx, 1
@@ -29,9 +26,8 @@ next:
 next2:
 	mov ebx, data3
 	mov ecx, ndata3
-	mov edx, 4294967295
+	mov edx, 255
 	call memsqsum
-	call print_eax
 	cmp eax, edx
 	je if
 	mov ebx, 1
