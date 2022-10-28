@@ -43,10 +43,21 @@ next3:
 	mov edx, 255
 	call memsqsum
 	cmp eax, edx
-	je if
+	je next4
 	mov ebx, 1
 	jmp end
 
+next4:
+	mov eax, 0
+	mov ebx, data5
+	mov ecx, ndata5
+	mov edx, 0
+	call memsqsum
+	cmp eax, edx
+	je if
+	mov ebx, 1
+	jmp end
+	
 if:	mov ebx, 0
 	jmp end
 	
@@ -65,3 +76,5 @@ data3:	dd 1, 1, 2, 4, 8 ,13
 ndata3:	equ ($ - data3) / 4
 data4:  times 255 dd 1
 ndata4:	equ ($ - data4) / 4
+data5:	dd 0, 0, 0
+ndata5:	equ ($ - data5) / 4
