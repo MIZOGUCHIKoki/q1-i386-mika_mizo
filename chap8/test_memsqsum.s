@@ -59,7 +59,6 @@ next4:
 	je nextR
 	mov ebx, 1
 	jmp end
-<<<<<<< HEAD
 
 nextR:
   mov eax,  0
@@ -87,10 +86,6 @@ nextR:
 
 if:	
   mov ebx, 0
-=======
-	
-if:	mov ebx, 0
->>>>>>> b65975bb9794be9c1d71d3f82568c96ab7592e79
 	jmp end
 
 nif:
@@ -106,17 +101,13 @@ end:
 
 data1:	dd 65535
 ndata1:	equ ($ - data1) / 4
-data2:	dd 
+data2:	dd 0
 ndata2:	equ ($ - data2) / 4
 data3:	dd 1, 1, 2, 4, 8 ,13
 ndata3:	equ ($ - data3) / 4
 data4:  times 255 dd 1
 ndata4:	equ ($ - data4) / 4
-<<<<<<< HEAD
-
 dataR:  times 5 dd 0
 ndataR: equ ($ - dataR) / 4
-=======
 data5:	dd 0, 0, 0
 ndata5:	equ ($ - data5) / 4
->>>>>>> b65975bb9794be9c1d71d3f82568c96ab7592e79
