@@ -81,6 +81,16 @@ nextR:
   cmp esi,  300
   jne nif
 
+nextS:
+  mov eax,  0
+  mov ebx,  data2
+  mov ecx,  ndata2
+  mov edx,  esp
+  call memsqsum
+  cmp esp, edx
+  jne nif
+  jmp if
+
   
 
 
@@ -107,7 +117,5 @@ data3:	dd 1, 1, 2, 4, 8 ,13
 ndata3:	equ ($ - data3) / 4
 data4:  times 255 dd 1
 ndata4:	equ ($ - data4) / 4
-dataR:  times 5 dd 0
-ndataR: equ ($ - dataR) / 4
 data5:	dd 0, 0, 0
 ndata5:	equ ($ - data5) / 4
