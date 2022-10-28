@@ -12,8 +12,7 @@ over32bit:
 	mov ebx, data1
 	mov ecx, ndata1
 	call memsqsum
-	mov edx, 4294836225
-	cmp eax, edx
+	cmp eax, data1a
   jne nif
 
 zerodata:
@@ -21,8 +20,7 @@ zerodata:
 	mov ebx, data2
 	mov ecx, ndata2
 	call memsqsum
-	mov edx, 0
-	cmp eax, edx
+	cmp eax, data2a
   jne nif
 
 accuracyOfCaculation:
@@ -30,8 +28,7 @@ accuracyOfCaculation:
 	mov ebx, data3
 	mov ecx, ndata3
 	call memsqsum
-	mov edx, 255
-	cmp eax, edx
+	cmp eax, data3a
   jne nif
 
 numberOfElemets:
@@ -39,8 +36,7 @@ numberOfElemets:
 	mov ebx, data4
 	mov ecx, ndata4
 	call memsqsum
-	mov edx, 255
-	cmp eax, edx
+	cmp eax, data4a
   jne nif
 
 accuracyOfReg:
@@ -64,7 +60,7 @@ accuracyOfReg:
   cmp esi,  300
   jne nif
 
-nextZero:
+numberOfElement0:
   mov eax,  0
   mov ebx,  data2
   mov ecx,  0
@@ -91,11 +87,16 @@ end:
 
 data1:	dd 65535
 ndata1:	equ ($ - data1) / 4
+data1a: equ 4294836225
 data2:	dd 0
 ndata2:	equ ($ - data2) / 4
+data2a: equ 0
 data3:	dd 1, 1, 2, 4, 8 ,13
 ndata3:	equ ($ - data3) / 4
+data3a: equ 255
 data4:  times 255 dd 1
 ndata4:	equ ($ - data4) / 4
+data4a: equ 255
 data5:	dd 0, 0, 0
 ndata5:	equ ($ - data5) / 4
+data5a: equ 0
