@@ -4,6 +4,7 @@
 
 
 _start:
+	mov eax, 0
 	mov ebx, data1
 	mov ecx, ndata1
 	mov edx, 55
@@ -14,6 +15,7 @@ _start:
 	jmp end
 
 next:
+	mov eax, 0
 	mov ebx, data2
 	mov ecx, ndata2
 	mov edx, 0
@@ -24,6 +26,7 @@ next:
 	jmp end
 
 next2:
+	mov eax, 0
 	mov ebx, data3
 	mov ecx, ndata3
 	mov edx, 255
@@ -45,7 +48,7 @@ end:
 
 data1:	dd 1, 2, 3, 4, 5
 ndata1:	equ ($ - data1) / 4
-data2:	dd 0, 0, 0
+data2:	dd 
 ndata2:	equ ($ - data2) / 4
-data3:	dd 1, 1, 2, 4, 8, 13
+data3:	dd 1, 1, 2, 4, 8 ,13
 ndata3:	equ ($ - data3) / 4
