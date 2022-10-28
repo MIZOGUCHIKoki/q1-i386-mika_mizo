@@ -5,7 +5,7 @@ LDFLAGS = -m elf_i386
 test_memsqsum: test_memsqsum.o memsqsum.o
 	$(LD) $(LDFLAGS) $+ -o $@
 
-memsqsum: memsqsum.o print_eax.o
+memsqsum: memsqsum.o
 	$(LD) $(LDFLAGS) $+ -o $@
 
 %.o: %.s
