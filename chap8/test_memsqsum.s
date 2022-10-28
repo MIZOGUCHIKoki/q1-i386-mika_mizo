@@ -4,6 +4,8 @@
 
 
 _start:
+	mov edi, 0
+	mov esi, 0
 	mov eax, 0
 	mov ebx, data1
 	mov ecx, ndata1
