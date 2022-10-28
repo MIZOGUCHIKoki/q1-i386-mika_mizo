@@ -10,6 +10,7 @@ memsqsum:
 
   mov   esi,  0
   mov   eax,  0
+  dec   ecx
 loop:
   cmp   ecx,  0
   je    endp
