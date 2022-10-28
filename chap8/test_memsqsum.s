@@ -7,10 +7,10 @@ _start:
 
 initeax:
   mov eax,  30
-  mov ebx,  data1
-  mov ecx,  ndata1
+  mov ebx,  data2
+  mov ecx,  ndata2
   call  memsqsum
-  cmp eax,  data1a
+  cmp eax,  data2a
   jne nif
 
 
