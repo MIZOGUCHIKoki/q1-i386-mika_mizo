@@ -64,9 +64,9 @@ nextR:
   mov eax,  0
   mov ebx,  data2
   mov ecx,  ndata2
-  mov edx,  0
-  mov edi,  0
-  mov esi,  0
+  mov edx,  100
+  mov edi,  200
+  mov esi,  300
   call memsqsum
   cmp eax,  0
   jne nif
@@ -74,11 +74,11 @@ nextR:
   jne nif
   cmp ecx,  ndata2
   jne nif
-  cmp edx,  0
+  cmp edx,  100
   jne nif
-  cmp edi,  0
+  cmp edi,  200
   jne nif
-  cmp esi,  0
+  cmp esi,  300
   jne nif
 
   
