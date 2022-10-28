@@ -89,9 +89,15 @@ nextS:
   call memsqsum
   cmp esp, edx
   jne nif
-  jmp if
 
-  
+nextZero:
+  mov eax,  0
+  mov ebx,  data2
+  mov ecx,  0
+  call  memsqsum
+  cmp eax,  0
+  jne nif
+  jmp if
 
 
 if:	
