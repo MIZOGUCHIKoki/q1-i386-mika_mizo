@@ -46,6 +46,14 @@ numberOfElemets:
 	cmp eax, data4a
   jne nif
 
+zeroData:
+	mov eax, 0
+	mov ebx, data5
+	mov ecx, ndata5
+	call memsqsum
+	cmp eax, data5a
+  jne nif
+
 accuracyOfReg:
   mov eax,  0
   mov ebx,  data2
