@@ -10,7 +10,7 @@ memsqsum: memsqsum.o print_eax.o
 
 
 %.o: %.s
-	$(AS) $+
+	$(AS) $<
 
 .PHONY: clean test
 
