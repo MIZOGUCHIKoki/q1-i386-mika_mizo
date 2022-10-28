@@ -74,7 +74,7 @@ data2:	dd
 ndata2:	equ ($ - data2) / 4
 data3:	dd 1, 1, 2, 4, 8 ,13
 ndata3:	equ ($ - data3) / 4
-data4:  times 255 dd 3
+data4:  times 255 dd 1
 ndata4:	equ ($ - data4) / 4
 data5:	dd 0, 0, 0
 ndata5:	equ ($ - data5) / 4
