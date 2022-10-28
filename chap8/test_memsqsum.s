@@ -4,6 +4,7 @@
 
 
 _start:
+over32bit:
 	mov eax, 0
 	mov ebx, data1
 	mov ecx, ndata1
@@ -12,51 +13,34 @@ _start:
 	cmp eax, edx
   jne nif
 
-next:
-	mov eax, 12
+zerodata:
+	mov eax, 0
 	mov ebx, data2
 	mov ecx, ndata2
 	mov edx, 0
 	call memsqsum
 	cmp eax, edx
-	je next2
-	mov ebx, 1
-	jmp end
+  jne nif
 
-next2:
+accuracyOfCaculation:
 	mov eax, 0
 	mov ebx, data3
 	mov ecx, ndata3
 	mov edx, 255
 	call memsqsum
 	cmp eax, edx
-	je next3
-	mov ebx, 1
-	jmp end
+  jne nif
 
-next3:
+numberOfElemets:
 	mov eax, 0
 	mov ebx, data4
 	mov ecx, ndata4
 	mov edx, 255
 	call memsqsum
 	cmp eax, edx
-	je next4
-	mov ebx, 1
-	jmp end
+  jne nif
 
-next4:
-	mov eax, 0
-	mov ebx, data5
-	mov ecx, ndata5
-	mov edx, 0
-	call memsqsum
-	cmp eax, edx
-	je nextR
-	mov ebx, 1
-	jmp end
-
-nextR:
+accuracyOfReg:
   mov eax,  0
   mov ebx,  data2
   mov ecx,  ndata2
@@ -75,15 +59,6 @@ nextR:
   cmp edi,  200
   jne nif
   cmp esi,  300
-  jne nif
-
-nextS:
-  mov eax,  0
-  mov ebx,  data2
-  mov ecx,  ndata2
-  mov edx,  esp
-  call memsqsum
-  cmp esp, edx
   jne nif
 
 nextZero:
