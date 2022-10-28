@@ -91,7 +91,6 @@ end:
 
 data1:	dd 65535
 ndata1:	equ ($ - data1) / 4
-data1a: equ 
 data2:	dd 0
 ndata2:	equ ($ - data2) / 4
 data3:	dd 1, 1, 2, 4, 8 ,13
@@ -100,4 +99,3 @@ data4:  times 255 dd 1
 ndata4:	equ ($ - data4) / 4
 data5:	dd 0, 0, 0
 ndata5:	equ ($ - data5) / 4
-eaxdata 
