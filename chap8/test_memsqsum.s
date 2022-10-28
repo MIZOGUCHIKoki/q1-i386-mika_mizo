@@ -76,9 +76,14 @@ numberOfElement0:
   jne nif
 
 stack:
+  mov eax,  0
+  mov ebx,  data2
+  mov ecx,  ndata2
   mov edx,  [reg]
   mov edx,  esp
   call memsqsum
+  cmp eax,  data2a
+  jne nif
   cmp edx,  esp
   jne nif
 
