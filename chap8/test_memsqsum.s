@@ -5,6 +5,13 @@
 
 _start:
 
+initeax:
+  mov eax,  30
+  mov ebx,  data1
+  mov ecx,  ndata1
+  call  memsqsum
+  cmp eax,  data1a
+  jne nif
 
 
 over32bit:
@@ -100,3 +107,4 @@ data4a: equ 255
 data5:	dd 0, 0, 0
 ndata5:	equ ($ - data5) / 4
 data5a: equ 0
+reg:  dd  0
