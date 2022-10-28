@@ -2,11 +2,12 @@ AS = nasm -felf
 LD = ld
 LDFLAGS = -m elf_i386
 
+test_memsqsum: test_memsqsum.o print_eax.o
+	$(LD) $(LDFLAGS) $+ -o $@
+
 memsqsum: memsqsum.o print_eax.o
 	$(LD) $(LDFLAGS) $+ -o $@
 
-test_memsqsum: test_memsqsum.o print_eax.o
-	$(LD) $(LDFLAGS) $+ -o $@
 
 %.o: %.s
 	$(AS) $+
