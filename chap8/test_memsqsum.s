@@ -74,7 +74,13 @@ numberOfElement0:
   call  memsqsum
   cmp eax,  0
   jne nif
-  jmp if
+
+stack:
+  mov edx,  [reg]
+  mov edx,  esp
+  call memsqsum
+  cmp edx,  esp
+  jne nif
 
 
 if:	
@@ -107,4 +113,4 @@ data4a: equ 255
 data5:	dd 0, 0, 0
 ndata5:	equ ($ - data5) / 4
 data5a: equ 0
-reg:  dd  0
+reg:  dd  0, 0
