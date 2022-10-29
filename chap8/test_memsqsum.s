@@ -8,15 +8,6 @@ _start:
   mov edi,  200
   mov esi,  300
 
-initeax:
-  mov eax,  30
-  mov ebx,  data2
-  mov ecx,  ndata2
-  call  memsqsum
-  cmp eax,  data2a
-  jne nif
-
-
 over32bit:
 	mov eax, 0
 	mov ebx, data1
@@ -25,11 +16,14 @@ over32bit:
 	cmp eax, data1a
   jne nif
 
+
+
 zerodata:
 	mov eax, 0
 	mov ebx, data2
 	mov ecx, ndata2
 	call memsqsum
+  call memsqsum
 	cmp eax, data2a
   jne nif
 
