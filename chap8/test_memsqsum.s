@@ -56,7 +56,7 @@ accuracyOfReg:
   mov ecx,  ndata3
   call memsqsum
   call memsqsum
-  cmp eax,  0
+  cmp eax,  data3a
   jne nif
   cmp ebx,  data3
   jne nif
