@@ -4,6 +4,9 @@
 
 
 _start:
+  mov edx,  100
+  mov edi,  200
+  mov esi,  300
 
 initeax:
   mov eax,  30
@@ -58,9 +61,6 @@ accuracyOfReg:
   mov eax,  0
   mov ebx,  data2
   mov ecx,  ndata2
-  mov edx,  100
-  mov edi,  200
-  mov esi,  300
   call memsqsum
   cmp eax,  0
   jne nif
