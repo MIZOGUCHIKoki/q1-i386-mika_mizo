@@ -23,7 +23,6 @@ zerodata:
 	mov ebx, data2
 	mov ecx, ndata2
 	call memsqsum
-  call memsqsum
 	cmp eax, data2a
   jne nif
 
@@ -53,14 +52,15 @@ zeroData:
 
 accuracyOfReg:
   mov eax,  0
-  mov ebx,  data2
-  mov ecx,  ndata2
+  mov ebx,  data3
+  mov ecx,  ndata3
+  call memsqsum
   call memsqsum
   cmp eax,  0
   jne nif
-  cmp ebx,  data2
+  cmp ebx,  data3
   jne nif
-  cmp ecx,  ndata2
+  cmp ecx,  ndata3
   jne nif
   cmp edx,  100
   jne nif
