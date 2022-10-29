@@ -65,7 +65,7 @@ numberOfElement0:
   mov ebx,  data1
   mov ecx,  0
   call  memsqsum
-  cmp eax,  100
+  cmp eax,  0
   jne nif
   cmp ebx,  data1
   jne nif
