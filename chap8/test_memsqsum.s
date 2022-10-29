@@ -4,9 +4,9 @@
 
 
 _start:
-  mov edx,  100
-  mov edi,  200
-  mov esi,  300
+  mov edx,  123
+  mov edi,  345
+  mov esi,  567
 
 over32bit:
 	mov eax, 0
@@ -62,11 +62,11 @@ accuracyOfReg:
   jne nif
   cmp ecx,  ndata3
   jne nif
-  cmp edx,  100
+  cmp edx,  123
   jne nif
-  cmp edi,  200
+  cmp edi,  345
   jne nif
-  cmp esi,  300
+  cmp esi,  567
   jne nif
 
 numberOfElement0:
