@@ -60,15 +60,15 @@ accuracyOfReg:
   cmp esi,  123
   jne nif
 
-numberOfElement0:
-  mov eax,  0
-  mov ebx,  data1
-  mov ecx,  0
-  call  memsqsum
-  cmp eax,  0
-  jne nif
-  cmp ebx,  data1
-  jne nif
+;numberOfElement0:
+;  mov eax,  0
+;  mov ebx,  data1
+;  mov ecx,  0
+;  call  memsqsum
+;  cmp eax,  0
+;  jne nif
+;  cmp ebx,  data1
+;  jne nif
 
 
 if:	
