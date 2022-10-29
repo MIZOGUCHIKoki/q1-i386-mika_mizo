@@ -1,0 +1,38 @@
+\section{アセンブリ言語による整列アルゴリズム記述可否の検証}
+\subsection{実験の目的}
+高級プログラミング言語，{\ttfamily Java, C, Python}などは，『コンパイラ』と呼ばれる装置を通して機械語に書き換えられ，コンピュータで実行されている．\par
+それに対して，アセンブリ言語は各機械語命令につけられた「意味する名前」（ニーモニック；mnemonic）を使ってプログラムを表記する表記法である．
+また，アセンブリ言語表記を機械語のビット列に変換する作業をアセンブルと言い，それを行うソフトウェアをアセンブラと言う．\cite{assembly}\par
+つまり，コンパイラとアセンブラは別物であり，アセンブラは機械語の表記を変えたものである故にコンピュータへの命令を1対1で書き換えるものである点がコンパイラと大きく違う点である．\par
+本実験課題の目的は，このようなアセンブリ言語・機械語に対して，コンパイラを使わずに整列アルゴリズムを直接技術することが可能であることが可能であるか確認することである．
+\subsection{プログラムの外部仕様}
+プログラムは，アセンブリ言語で記述し，i386 CPUのシェル上で実行する．アセンブラには{\ttfamily nasm}を用い，リンカには{\ttfamily ld}を用いる．以下のコマンドで{\ttfamily file.s}を{\ttfamily a.out}を生成し実行する．
+\begin{lstlisting}[language={Bash},numbers = {none},frame = {single}]
+nasm -felf file.s
+ld -m elf_i386 file.o
+./a.out
+    \end{lstlisting}
+{\ttfamily a.out}ファイルは{\ttfamily chmod}で実行可能にする必要がある．\par
+ここで，{\ttfamily nasm}のオプションとして{\ttfamily -felf}，{\ttfamily ld}のオプションとして{\ttfamily -m elf\_i386}が指定してあるが，これはi386 32ビットアーキテクチャ（Intel 80386）上で実行する場合のオプションである．
+\subsection{プログラムの内部仕様}
+整数列に対して昇順にソートするアルゴリズムをアセンブリ言語で記述する．その際，\testsort ファイルが\sort サブルーチンを呼び出してソートを行う．\par
+検証したい整数列は，\testsort 内の{\ttfamily data1}，データの個数は{\ttfamily ndata1}で定義しており，\testsort 実行時に{\ttfamily data1}に格納してある整数列が\print サブルーチンによって出力される．
+{\ttfamily data1}の先頭番地は{\ttfamily EBX}，{\ttfamily ndata1}は{\ttfamily ECX}に格納する．\sort の呼び出し前後で他の汎用レジスタの値は変化しないように設計されている．内部処理の概要を\ref{kadai1:abs}に示す．
+\begin{figure}[h]
+    \centering
+    \caption{処理概要}
+    \label{kadai1:abs}
+    \tikzset{mynode/.style={rectangle,rounded corners,draw,minimum height=1cm,minimum width=3cm,text centered}}
+    \begin{tikzpicture}
+        \node at (0,0)(call){{\ttfamily call sort}};
+        \node[below=0.5cm of call](print){{\ttfamily call print\_eax}};
+        \node[right=2cm of call](sort){{\ttfamily sort}サブルーチン};
+        \node[left=2cm of print](printeax){\print サブルーチン};
+        \draw[-Stealth,very thick](call.east)to(sort.west);
+        \draw[-latex,very thick](call)to(print);
+        \draw[-Stealth,very thick](print)to[bend left=30](printeax);
+        \draw[-Stealth,very thick](printeax)to[bend left=30](print);
+        \node at ($(print)!0.5!(printeax)+(0,-1.5cm)$){\sort されたデータを1行ずつ表示};
+        \node[inner sep=0.2cm,fit={(print)(call)},draw,dotted](){};
+    \end{tikzpicture}
+\end{figure}
