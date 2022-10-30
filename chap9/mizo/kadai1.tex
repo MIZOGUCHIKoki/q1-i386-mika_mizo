@@ -4,19 +4,19 @@
 それに対して，アセンブリ言語は各機械語命令につけられた「意味する名前」（ニーモニック；mnemonic）を使ってプログラムを表記する表記法である．
 また，アセンブリ言語表記を機械語のビット列に変換する作業をアセンブルと言い，それを行うソフトウェアをアセンブラと言う．\cite{assembly}\par
 つまり，コンパイラとアセンブラは別物であり，アセンブラは機械語の表記を変えたものである故にコンピュータへの命令を1対1で書き換えるものである点がコンパイラと大きく違う点である．\par
-本実験課題の目的は，このようなアセンブリ言語・機械語に対して，コンパイラを使わずに整列アルゴリズムを直接技術することが可能であることが可能であるか確認することである．
+本実験課題の目的は，このようなアセンブリ言語・機械語に対して，コンパイラを使わずに整列アルゴリズムを直接技術することが可能であるか確認することである．
 \subsection{プログラムの外部仕様}
 プログラムは，アセンブリ言語で記述し，i386 CPUのシェル上で実行する．アセンブラには{\ttfamily nasm}を用い，リンカには{\ttfamily ld}を用いる．以下のコマンドで{\ttfamily file.s}を{\ttfamily a.out}を生成し実行する．
 \begin{lstlisting}[language={Bash},numbers = {none},frame = {single}]
-nasm -felf file.s
-ld -m elf_i386 file.o
-./a.out
+$ nasm -felf file.s
+$ ld -m elf_i386 file.o
+$ ./a.out
     \end{lstlisting}
 {\ttfamily a.out}ファイルは{\ttfamily chmod}で実行可能にする必要がある．\par
 ここで，{\ttfamily nasm}のオプションとして{\ttfamily -felf}，{\ttfamily ld}のオプションとして{\ttfamily -m elf\_i386}が指定してあるが，これはi386 32ビットアーキテクチャ（Intel 80386）上で実行する場合のオプションである．
 \subsection{プログラムの内部仕様}
-整数列に対して昇順にソートするアルゴリズムをアセンブリ言語で記述する．その際，\testsort ファイルが\sort サブルーチンを呼び出してソートを行う．\par
-検証したい整数列は，\testsort 内の{\ttfamily data1}，データの個数は{\ttfamily ndata1}で定義しており，\testsort 実行時に{\ttfamily data1}に格納してある整数列が\print サブルーチンによって出力される．
+\(0\)以上\(2^{31}\)未満の自然数列に対して昇順に整列するアルゴリズムをアセンブリ言語で記述する．その際，\testsort ファイルが\sort サブルーチンを呼び出して整列を行う．\par
+検証したい自然数列は，\testsort 内の{\ttfamily data1}，データの個数は{\ttfamily ndata1}で定義しており，\testsort 実行時{\ttfamily data1}に格納してある自然数列が\print サブルーチンによって出力される．
 {\ttfamily data1}の先頭番地は{\ttfamily EBX}，{\ttfamily ndata1}は{\ttfamily ECX}に格納する．\sort の呼び出し前後で他の汎用レジスタの値は変化しないように設計されている．内部処理の概要を\ref{kadai1:abs}に示す．
 \begin{figure}[h]
     \centering
@@ -36,3 +36,33 @@ ld -m elf_i386 file.o
         \node[inner sep=0.2cm,fit={(print)(call)},draw,dotted](){};
     \end{tikzpicture}
 \end{figure}
+\subsection{実験}
+\subsubsection{実験方法}
+以下のコンピュータを利用して，アセンブリ言語で書いた整列プログラムを実行可能ファイルに変換し実行した．\par
+ここで，{\ttfamily data1}のデータをどのように設定するかが大切である．例えば，データ列が同じ数値の場合整列処理の際に正しい結果になりうるかの検証をする．
+\begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={}]
+$ uname -a
+Linux KUT20VLIN-462 5.4.0-70-generic #78~18.04.1-Ubuntu SMP Sat Mar 20 14:10:07 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+\end{lstlisting}
+\print{\ttfamily .s}，\testsort，\sort{\ttfamily .s}をそれぞれアセンブルして実行する．
+\begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={Bash}]
+$ nasm -felf print_eax.s ; nasm -felf test_sort.s ; nasm -felf sort.s
+$ ld -m elf_i386 print_eax.o test_sort.o sort.o
+$ ./a.out
+\end{lstlisting}
+実行結果を確認し，整列されているか確認する．
+\subsubsection{実験結果}
+実験結果と期待される結果を\ref{tbl:execute}に示す．これからわかるように，自然数列を昇順に整列されていることが確認できる．
+\begin{table}[h]
+    \centering
+    \caption{実験結果と比較}
+    \label{tbl:execute}
+    \begin{tabular}{l|ll}
+        入力   \\
+        出力   \\
+        期待出力 \\
+    \end{tabular}
+\end{table}
+\subsection{考察}
+\ref{tbl:execute}により，自然数列を昇順に整列できることを確認できた．また，整列する自然数列の中に同じ数字が含まれていても正しく整列することも確認できた．\par
+ただ，これはあくまで\(0\)以上\(2^{31}\)未満の自然数に限った整列アルゴリズムであるため，負の整数やその他の有理数などを対象にした整列アルゴリズムが記述可能であるかは不明である．

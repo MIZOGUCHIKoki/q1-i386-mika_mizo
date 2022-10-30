@@ -24,8 +24,10 @@
 
     \renewcommand{\thefootnote}{*\arabic{footnote}}
 \renewcommand{\lstlistingname}{}
+\renewcommand{\figurename}{}
+\renewcommand{\tablename}{}
 \AtBeginDocument{
-            \renewcommand{\thelstlisting}{src. \thesection.\arabic{lstlisting}}
+            \renewcommand{\thelstlisting}{src \thesection.\arabic{lstlisting}}
 }
 \lstset{
         %プログラム言語(複数の言語に対応，C,C++も可)
@@ -62,6 +64,13 @@
         %キャプションの場所(tbならば上下両方に記載)
     captionpos = t
 }
+\lstdefinelanguage{Bash}{
+    morekeywords=[1]{
+        nasm,ld,uname
+    },
+    sensitive=true
+}
+
 \makeatletter
     \renewcommand{\thefigure}{%
     Fig\ \thesection.\arabic{figure}}
@@ -90,9 +99,7 @@
 \pagenumbering{arabic}
 \input{kadai1.tex}
 \newpage
+\input{ref.tex}
+\newpage
 \input{source.tex}
-\begin{thebibliography}{99}
-    \bibitem{assembly} 情報学群実験第2テキスト 1章 機械語とアセンブリ言語（\today 最終確認）\\
-    \url{http://www.info.kochi-tech.ac.jp/y-takata/pl2/part1/hellohex.html}
-\end{thebibliography}
 \end{document}
