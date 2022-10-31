@@ -8,6 +8,10 @@ public class sort {
             System.out.print(data1[i]);
         }
         System.out.println();
+
+        for (int i = 0; i < ndata; i++) {
+            push_heap(data1, ndata, i);
+        }
     }
 
     public static void push_heap(int[] data1, int x, int k) {
