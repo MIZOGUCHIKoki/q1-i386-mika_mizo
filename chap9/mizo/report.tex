@@ -4,7 +4,8 @@
 \usepackage{graphicx,color}
 \usepackage{tikz,listings,wrapfig,float,xcolor}
 \usepackage{url,multirow,framed,subcaption}
-\usepackage[unicode=true,hidelinks,pdfusetitle]{hyperref}
+\usepackage[unicode=true,hidelinks,pdfusetitle,bookmarks,hypertexnames=false,debug]{hyperref}
+\usepackage{bookmark}
 \usepackage{luatexja-fontspec}
 \usepackage{tcolorbox,listings}
 \bibliographystyle{junsrt}
@@ -101,8 +102,8 @@
 \newpage
 
 \input{kadai2.tex}
-\cleardoublepage
-
+\newpage
+\phantomsection
 \input{syaji.tex}
 \bibliography{bib}
 \addcontentsline{toc}{section}{\refname}
