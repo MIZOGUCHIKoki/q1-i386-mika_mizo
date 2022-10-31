@@ -1,31 +1,79 @@
 public class sort {
+    static int size = 10;
+    static int[] data1 = { 0, 1, 3, 5, 7, 9, 2, 4, 6, 8, 3, 1 };// 元々のデータ
+    static int ndata = data1.length;// データの個数
+    static int[] data1r = new int[ndata];// push_heap後
+    static int[] sortdata = new int[ndata];// delete_maximum後
+
     public static void main(String[] args) {
-        int[] data1 = new int[10];// 元々のデータ
-        int ndata = data1.length;// データの個数
-        int[] data1r = new int[ndata];// 結果
-        for (int i = 0; i < data1.length; i++) {
-            data1[i] = 9 - i;
-            System.out.print(data1[i]);
+        System.out.println("Original");
+        for (int i = 1; i < ndata; i++) {
+            System.out.print(data1[i] + " ");
         }
         System.out.println();
 
-        for (int i = 0; i < ndata; i++) {
-            push_heap(data1, ndata, i);
+        for (int i = 1; i < ndata; i++) {
+            push_heap(data1r, data1[i], i);
         }
+        System.out.println("push_heap");
+        printArray(data1r);
+        System.out.println("delete_maximum");
+        for (int i = 1; i < ndata; i++) {
+            delete_maximum(data1r, sortdata, i);
+        }
+        printArray(sortdata);
     }
 
-    public static void push_heap(int[] data1, int x, int k) {
-        while (data1[k] > data1[k / 2] && k > 1) {
-            swap(data1, k);
+    private static void push_heap(int[] data, int x, int k) {
+        data[k] = x;
+        while (data[k] > data[k / 2] && k > 1) {
+            // 親の値が小さければ値を交換
+            int i = data[k];
+            data[k] = data[k / 2];
+            data[k / 2] = i;
+
             k = k / 2;
         }
     }
 
-    private static void swap(int[] data1, int k) {
-        if (data[k] < data[k / 2]) {// 親の値が小さければ値を交換
-            int i = data[k];
-            data[k] = data[k / 2];
-            data[k / 2] = i;
+    private static void printArray(int[] array) {
+        for (int i = 1; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
+    }
+
+    private static void delete_maximum(int[] data, int[] sortdata, int j) {
+        sortdata[j] = data[1];
+        data[1] = data[size];// 葉のデータを根に移動
+        size--;
+        int k = 1;
+        int big = 0;
+        while (2 * k <= size) {// 子を持つか判定
+            if (2 * k == size) {// 子が1つの場合
+                if (data[k] < data[2 * k]) {// 親子の値を比較
+                    int i = data[k];// 親が小さい場合は交換
+                    data[k] = data[2 * k];
+                    data[2 * k] = i;
+                    k = 2 * k;
+                } else {
+                    break;
+                }
+            } else {// 子が2つの場合
+                if (data[2 * k] > data[2 * k + 1]) {
+                    big = 2 * k;
+                } else {
+                    big = 2 * k + 1;
+                } // 大きいデータを持つ子を見つける
+                if (data[k] < data[big]) {
+                    int i = data[k];
+                    data[k] = data[big];
+                    data[big] = i;
+                } else {
+                    break;
+                }
+
+            }
         }
     }
 }
