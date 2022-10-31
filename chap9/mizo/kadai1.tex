@@ -26,8 +26,8 @@ $ ./a.out
     \begin{tikzpicture}
         \node at (0,0)(call){{\ttfamily call sort}};
         \node[below=0.5cm of call](print){{\ttfamily call print\_eax}};
-        \node[right=2cm of call](sort){{\ttfamily sort}サブルーチン};
-        \node[left=2cm of print](printeax){\print サブルーチン};
+        \node[right=2cm of call,text width=5cm](sort){{\ttfamily sort}サブルーチン};
+        \node[left=2cm of print,text width=5cm](printeax){\print サブルーチン};
         \draw[-Stealth,very thick](call.east)to(sort.west);
         \draw[-latex,very thick](call)to(print);
         \draw[-Stealth,very thick](print)to[bend left=30](printeax);
