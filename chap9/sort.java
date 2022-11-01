@@ -17,7 +17,6 @@ public class sort {
         }
         System.out.println("push_heap");
         printArray(data1r);
-        System.out.println("size: " + size);
         System.out.println("delete_maximum");
         for (int i = ndata - 1; i >= 1; i--) {
             sortdata[i] = delete_maximum(data1r);
