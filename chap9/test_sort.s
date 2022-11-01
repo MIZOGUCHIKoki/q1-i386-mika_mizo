@@ -8,9 +8,9 @@ _start:
   call  sort
   mov edi,  0
 loop:
-  cmp edi,  ndata1 - 1
+  cmp edi,  ndata1
   je  endp
-  mov eax,  [data1 + edi*4]
+  mov eax,  [data1 + edi * 4]
   call print_eax
   inc edi
   jmp loop
@@ -22,6 +22,6 @@ endp:
   int 0x80
 
   section .data
-data1:  dd 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8
+data1:  dd 9, 8, 7, 6, 5, 4, 3, 2, 1
 ndata1  equ ($ - data1) / 4
 
