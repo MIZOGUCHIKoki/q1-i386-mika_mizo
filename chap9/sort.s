@@ -1,53 +1,57 @@
   section .text
   global  sort
-
-	
 sort:
-	push esi
-	push edi
-	push edx
-	push eax
-	push ebx
-	push ecx
-	
-push_heap:
-	mov esi, subdata
-	add [esi], dword 1
-	mov esi, [esi]
-	mov edi, 2
-	cmp ecx, 0
-	je end
-	dec ecx
+	push  esi
+	push  edi
+	push  edx
+  push  ecx
+  push  ebx
+  push  eax
 
-while:
-	mov edx, 0
-	cmp esi, 1
-	jle push_heap
-	mov eax, esi
-	div edi
-	mov edi, esi
-	mov edx, [ebx + eax*4]
-	cmp [ebx + edi*4], edx
-	jle push_heap
-	mov esi, [ebx + edi*4]
-	mov [ebx + edi*4], edx
-	mov [ebx + eax*4], esi
-	mov esi, eax
-	jmp while
-	
-end:
-	mov eax, 1
-	int 0x80
+  mov   eax,  0 ; max_index
+  mov   edx,  0 ; max
+  dec   ecx
+loop0:
+  cmp   ecx,  0 ; ecx = i
+  jle   endp
+  mov   edx,  [ebx]   ; max = data[0]
+  mov   eax,  0       ; max_indent = 0
 
-	pop ecx
-	pop ebx
-	pop eax
+  mov   edi,  1 ; edi = j
+
+  loop1:
+    cmp   edi,  ecx   ; j > i?
+    jg    loop0l
+
+    mov   esi,  [ebx + edi*4] ; data[j]
+    cmp   esi,  edx       ; data[j] >= max
+    jge   then
+    jmp   endif
+
+    then:
+      mov edx,  [ebx + edi*4] ; max = data[j]
+      mov eax,  edi           ; max_index = j
+    endif:
+      inc edi
+      jmp loop1
+
+  loop0l:
+    push esi
+    push edi
+    mov   esi,  [ebx + eax*4]   ; m = data[max_index]
+    mov   edi,  [ebx + ecx*4]   ; edi = data[i]
+    mov   [ebx + eax*4],  edi   ; data[max_index],  data[i]
+    mov   [ebx + ecx*4],  esi   ; data[i] = m
+    pop edi
+    pop esi
+    dec   ecx
+    jmp   loop0
+	
+endp:
+  pop eax
+  pop ebx
+  pop ecx
 	pop edx
 	pop edi
 	pop esi
 	ret
-
-	
-	section .data
-subdata:	times 10 dd 0
-	
