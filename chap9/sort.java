@@ -4,6 +4,9 @@ public class sort {
     static int[] data1r = new int[ndata];// push_heap後
     static int size = 0;
     static int[] sortdata = new int[ndata];
+    static int max = 0;
+    static int k = 0;
+    static int big = 0;
 
     public static void main(String[] args) {
         System.out.println("Original");
@@ -47,12 +50,12 @@ public class sort {
     }
 
     private static int delete_maximum(int[] data) {
-        int sortdata = data[1];
+        max = data[1];
         data[1] = data[size];// 葉のデータを根に移動
         data[size] = -1;
         size--;
-        int k = 1;
-        int big = 0;
+        k = 1;
+        big = 0;
         while (2 * k <= size) {// 子を持つか判定
             if (2 * k == size) {// 子が1つの場合
                 if (data[k] < data[2 * k]) {// 親子の値を比較
@@ -80,6 +83,6 @@ public class sort {
 
             }
         }
-        return sortdata;
+        return max;
     }
 }
