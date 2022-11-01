@@ -27,6 +27,7 @@ public class sort {
         printArray(sortdata);
 
         buble(data1);
+        System.out.println("buble sort");
         printArray(data1);
 
     }
