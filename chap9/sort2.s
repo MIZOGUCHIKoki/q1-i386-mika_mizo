@@ -1,8 +1,8 @@
   section .text
-  global  sort
+  global  sort2
 
 	
-sort:
+sort2:
 	push esi
 	push edi
 	push edx
@@ -11,32 +11,28 @@ sort:
 	push ebx
 	
 push_heap:
-	mov esi, subdata
-	add [esi], dword 1
-	mov edi, 2
+	add [size], dword 1
+	mov esi, [size]		;esi = size
+	mov 
 	cmp ecx, 0
 	je end
 	dec ecx
-
+	
 while:
+	mov edi, 2
 	mov edx, 0
-	cmp esi, 1
+	cmp eax, 1
 	jle push_heap
-	mov eax, esi
 	div edi
-	mov edi, esi
-	mov edx, [ebx + eax*4]
-	cmp [ebx + edi*4], edx
+	mov edx, [ebx + esi*4]
+	mov edi, [ebx + eax*4]
+	cmp edx, edi
 	jle push_heap
-	mov esi, [ebx + edi*4]
-	mov [ebx + edi*4], edx
-	mov [ebx + eax*4], esi
-	mov esi, eax
+	mov [ebx + esi*4], edi
+	mov [ebx + eax*4], edx
 	jmp while
 	
-end:
-	mov eax, 1
-	int 0x80
+end:	
 
 	pop ebx
 	pop ecx
@@ -48,5 +44,4 @@ end:
 
 	
 	section .data
-subdata:	times 10 dd 0
-	
+size:	dd 0
