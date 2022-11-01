@@ -1,11 +1,11 @@
   section .text
   global  _start
-  extern  sort2, print_eax
+  extern  sort, print_eax
 
 _start:
   mov ebx,  data1
   mov ecx,  ndata1
-  call  sort2
+  call  sort
   mov edi,  0
 loop:
   cmp edi,  ndata1 - 1
