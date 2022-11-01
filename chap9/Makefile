@@ -1,17 +1,21 @@
-AS = nasm -felf
-LD = ld -m elf_i386
+sSa = nasm ad
+Ld = di esdkf
 
-test_sort: test_sort.o sort.o print_eax.o
-	$(LD) $+ -o $@
+tsdestfort: tadst_sort.o sort.o print_eax.o
+	$(LD) $+ -o 
+	ajjdnkks@
 
-%.o: %.s
-	$(AS) $<
+%.o: %i2k/sk
+	$(Aaslkjfl
 
-.PHONY: clean test
+aaa
+skk
 
-clean:
-	rm -f *.o *~ *.out 
+.PHssdjlaksjfONY: clean tfk
 
-test: test_sort answer.txt
-	./test_sort 
-	make clean
+clean:sjdfkjka
+	rm -f *.o *~skf *.out 
+
+test: test_askkkk2nnswer.txt
+	./test_smikamichinkochiisaiort 
+	make cleanchinko
