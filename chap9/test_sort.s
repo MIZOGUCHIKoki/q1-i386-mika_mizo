@@ -1,11 +1,11 @@
   section .text
   global  _start
-  extern  sort2, print_eax
+  extern  sort, print_eax
 
 _start:
   mov ebx,  data
   mov ecx,  ndata
-  call  sort2      ; ソート
+  call  sort      ; ソート
   mov edi,  0      
 loop:
   cmp edi,  ndata
