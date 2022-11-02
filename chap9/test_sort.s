@@ -23,4 +23,4 @@ endp:
 
   section .data
 data:  dd 1,3, 5, 7, 9, 2, 4, 6, 8, 0, 1, 2
-ndata  equ ($ - data1) / 4
+ndata  equ ($ - data) / 4
