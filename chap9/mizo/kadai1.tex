@@ -8,7 +8,7 @@
 \subsection{プログラムの仕様}
 \(0\)以上\(2^{31}\)未満の自然数列に対して昇順に整列するアルゴリズムをアセンブリ言語で記述する．その際，\testsort ファイルが\sort サブルーチンを呼び出して整列を行う．
 検証したい自然数列は，\testsort 内の{\ttfamily data1}にダブルワードで，データの個数は{\ttfamily ndata1}で定義しており，\testsort 実行時{\ttfamily data1}に格納してある自然数列が\print サブルーチンによって出力される．\par
-{\ttfamily data1}の先頭番地は{\ttfamily EBX}，{\ttfamily ndata1}は{\ttfamily ECX}に格納する．\sort の呼び出し前後で他の汎用レジスタの値は変化しないように設計されている．内部処理の概要を\ref{kadai1:abs}に示す．整列アルゴリズムは，\textbf{バブルソート}アルゴリズムを元に作成している．
+{\ttfamily data1}の先頭番地は{\ttfamily EBX}，{\ttfamily ndata1}は{\ttfamily ECX}に格納する．\sort の呼び出し前後で他の汎用レジスタの値は変化しないように設計されている．内部処理の概要を\ref{kadai1:abs}に示す．整列アルゴリズムは，\textbf{バブルソート}\footnote{バブルソートの簡単な説明}アルゴリズムを元に作成している．
 \begin{figure}[h]
     \centering
     \caption{処理概要}
@@ -29,19 +29,18 @@
 \end{figure}
 \subsection{実験}
 \subsubsection{実験方法}
-以下のコンピュータを利用して，アセンブリ言語で書いた整列プログラムを実行可能ファイルに変換し実行した．\par
-ここで，{\ttfamily data1}のデータをどのように設定するかが大切である．例えば，データ列が同じ数値の場合，整列処理の際正しい結果になりうるかの検証をする．
-\begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={}]
+\ref{usingPC}に示すコンピュータを利用して，アセンブリ言語で書いた整列プログラムを実行可能ファイルに変換し実行した．
+実行結果を確認し，整列されているか確認するとともに，{\ttfamily Java}で記述したプログラムとアセンブリプログラムを比較してどの部分をどのようにアセンブリ言語化したかを確認する．
+\begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={Bash},caption={使用したコンピュータ},label={usingPC}]
 $ uname -a
 Linux KUT20VLIN-462 5.4.0-70-generic #78~18.04.1-Ubuntu SMP Sat Mar 20 14:10:07 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 \end{lstlisting}
 \print{\ttfamily .s}，\testsort，\sort{\ttfamily .s}をそれぞれアセンブルして実行する．
-\begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={Bash}]
+\begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={Bash},caption={実行したコマンド}]
 $ nasm -felf print_eax.s ; nasm -felf test_sort.s ; nasm -felf sort.s
 $ ld -m elf_i386 print_eax.o test_sort.o sort.o
 $ ./a.out
 \end{lstlisting}
-実行結果を確認し，整列されているか確認するとともに，{\ttfamily Java}で記述したプログラムとアセンブリプログラムを比較してどの部分をどのようにアセンブリ言語化したかを確認する．
 \subsubsection{実験結果}
 実験結果と期待される結果を\ref{tbl:execute}に示す．これからわかるように，自然数列を昇順に整列されていることが確認できる．\par
 \begin{table}[h]
@@ -55,8 +54,9 @@ $ ./a.out
         期待出力 & {\ttfamily 0 1 1 2 2 3 4 5 6 7 8 9}
     \end{tabular}
 \end{table}
-{\ttfamily Java}で記述したバブルソート（\ref{src:java_buble}）と，アセンブリ言語で記述したバブルソート（\ref{src:assembuly_buble}）を比較して，言語化の箇所を確認する．\ref{src:java_buble}は入力データ列を{\ttfamily data}とし，\ref{src:assembuly_buble}は{\ttfamily EBX}に入力データ列の先頭番地，{\ttfamily ECX}入力データ列の個数を格納している．ソースコードの各処理の内容と，2つの言語による対応を\ref{tbl:ソースコードの行対応}に記す．
+{\ttfamily Java}で記述したバブルソート（\ref{src:java_buble}）と，アセンブリ言語で記述したバブルソート（\ref{src:assembuly_buble}）を比較して，言語化の箇所を確認する．前者は入力データ列を{\ttfamily data}とし，後者は{\ttfamily EBX}に入力データ列の先頭番地，{\ttfamily ECX}入力データ列の個数を格納している．ソースコードの各処理の内容と，2つの言語による対応を\ref{tbl:ソースコードの行対応}に記す．
 \begin{table}
+    \centering
     \caption{ソースコードの行対応}
     \label{tbl:ソースコードの行対応}
     \begin{tabular}{p{10cm}p{2cm}p{2cm}}
