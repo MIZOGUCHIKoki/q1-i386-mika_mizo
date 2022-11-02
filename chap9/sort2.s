@@ -11,25 +11,24 @@ sort2:
 	push ebx
 	
 push_heap:
-	add [size], dword 1
-	mov esi, [size]		;esi = size
-	mov 
-	cmp ecx, 0
+	add [size], dword 1	;size++
+	mov eax, [size]		;int k = size
+	mov edi, [ebx + eax*4]	;data[size] = x
+	mov esi, 2
+	cmp ecx, 0		;データの数繰り返し
 	je end
 	dec ecx
-	
+
 while:
-	mov edi, 2
+	cmp eax, 1		;k > 1
+	jle push_heap
 	mov edx, 0
-	cmp eax, 1
+	div esi			;k = k/2
+	cmp edi, [ebx + eax*4]	;data[k] > data[k/2]
 	jle push_heap
-	div edi
-	mov edx, [ebx + esi*4]
-	mov edi, [ebx + eax*4]
-	cmp edx, edi
-	jle push_heap
-	mov [ebx + esi*4], edi
-	mov [ebx + eax*4], edx
+	mov edx, edi		;int i = data[k]
+	mov edi, [ebx + eax*4]	;data[k] = data[k/2]
+	mov [ebx + eax*4], edx	;data[k/2] = i
 	jmp while
 	
 end:	
