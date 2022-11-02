@@ -32,7 +32,6 @@ while:
 	jmp while
 	
 end:	
-
 	pop ebx
 	pop ecx
 	pop eax
@@ -40,7 +39,5 @@ end:
 	pop edi
 	pop esi
 	ret
-
-	
 	section .data
 size:	dd 0
