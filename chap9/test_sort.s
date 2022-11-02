@@ -3,14 +3,14 @@
   extern  sort, print_eax
 
 _start:
-  mov ebx,  data1
-  mov ecx,  ndata1
-  call  sort
-  mov edi,  0
+  mov ebx,  data
+  mov ecx,  ndata
+  call  sort      ; ソート
+  mov edi,  0      
 loop:
-  cmp edi,  ndata1
+  cmp edi,  ndata
   je  endp
-  mov eax,  [data1 + edi * 4]
+  mov eax,  [data + edi * 4]
   call print_eax
   inc edi
   jmp loop
@@ -22,6 +22,5 @@ endp:
   int 0x80
 
   section .data
-data1:  dd 9, 8, 7, 6, 5, 4, 3, 2, 1
-ndata1  equ ($ - data1) / 4
-
+data:  dd 1,3, 5, 7, 9, 2, 4, 6, 8, 0, 1, 2
+ndata  equ ($ - data1) / 4
