@@ -6,6 +6,8 @@ test_sort: test_sort.o sort.o print_eax.o
 
 %.o: %.s
 	$(AS) $<
+htest_sort: test_sort2.o sort2.o print_eax.o
+	$(LD) $+ -o $@
 
 .PHONY: clean test
 
