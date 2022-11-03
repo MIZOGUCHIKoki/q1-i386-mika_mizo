@@ -15,7 +15,7 @@ push_heap:
 	mov eax, [size]		;int k = size
 	mov edi, [ebx + eax*4]	;data[size] = x
 	mov esi, 2
-	cmp ecx, 0		;データの数繰り返し
+	cmp ecx, 1		;データの数繰り返し
 	je end
 	dec ecx
 
@@ -26,7 +26,7 @@ while:
 	div esi			;k = k/2
 	cmp edi, [ebx + eax*4]	;data[k] > data[k/2]
 	jle push_heap
-	mov edx, edi		;int i = data[k]
+	mov edx, edi		;int i = data[l]
 	mov edi, [ebx + eax*4]	;data[k] = data[k/2]
 	mov [ebx + eax*4], edx	;data[k/2] = i
 	jmp while
