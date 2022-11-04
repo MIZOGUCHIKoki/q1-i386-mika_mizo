@@ -29,11 +29,15 @@
 \end{figure}
 \section{実験}
 \subsection{実験方法}
-\ref{usingPC}に示すコンピュータを利用して，アセンブリ言語で書いた整列プログラムを実行可能ファイルに変換し実行した．
+\ref{usingPC}に示すコンピュータとソフトウェアを利用して，アセンブリ言語で書いた整列プログラムを実行可能ファイルに変換し実行した．
 実行結果を確認し，整列されているか確認するとともに，{\ttfamily Java}で記述したプログラムとアセンブリプログラムを比較してどの部分をどのようにアセンブリ言語化したかを確認する．
-\begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={Bash},caption={使用したコンピュータ},label={usingPC}]
+\begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={Bash},caption={使用したコンピュータとソフトウェア},label={usingPC}]
 $ uname -a
 Linux KUT20VLIN-462 5.4.0-70-generic #78~18.04.1-Ubuntu SMP Sat Mar 20 14:10:07 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+$ nasm --version
+NASM version 2.13.02
+$ ld --version
+GNU ld (GNU Binutils for Ubuntu) 2.30
 \end{lstlisting}
 \print{\ttfamily .s}，\testsort，\sort{\ttfamily .s}をそれぞれアセンブルして実行する．
 \begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={Bash},caption={実行したコマンド}]
