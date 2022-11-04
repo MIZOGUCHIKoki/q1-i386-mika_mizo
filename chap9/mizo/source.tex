@@ -1,7 +1,9 @@
+\renewcommand{\thesection}{\Alph{section}}
+\chapter*{付録}
+\addcontentsline{toc}{chapter}{付録}
 \setcounter{section}{0}
-\renewcommand{\thesection}{付録\Alph{section}}
-\renewcommand{\thelstlisting}{\thesection.\arabic{lstlisting}}
 \section{ソースコード}
+\renewcommand{\thelstlisting}{\thesection.\arabic{lstlisting}}
 \begin{lstlisting}[caption={{\ttfamily sort.s}},label={src:sort.s},frame={shadowbox}]
     section .text
     global  sort

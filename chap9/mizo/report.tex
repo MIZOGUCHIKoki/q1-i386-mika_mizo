@@ -1,4 +1,4 @@
-\documentclass[luatex,unicode,paper=a4,11pt]{jlreq}
+\documentclass[luatex,unicode,paper=a4,11pt]{ltjsreport}
 \usepackage{amsmath,amsfonts,amssymb,mathtools,ascmac,bm,fancybox,calc,multicol,array}
 \usepackage[top=20truemm,bottom=20truemm,left=15truemm,right=15truemm]{geometry}
 \usepackage{graphicx,color}
@@ -28,7 +28,7 @@
 \renewcommand{\figurename}{}
 \renewcommand{\tablename}{}
 \AtBeginDocument{
-            \renewcommand{\thelstlisting}{src \thesection.\arabic{lstlisting}}
+            \renewcommand{\thelstlisting}{src \thechapter.\arabic{lstlisting}}
 }
 \lstset{
         %プログラム言語(複数の言語に対応，C,C++も可)
@@ -74,18 +74,19 @@
 
 \makeatletter
     \renewcommand{\thefigure}{%
-    Fig\ \thesection.\arabic{figure}}
-    \@addtoreset{figure}{section}
+    Fig\ \thechapter.\arabic{figure}}
+    \@addtoreset{figure}{chapter}
     \renewcommand{\thetable}{%
-    Tbl\ \thesection.\arabic{table}}
-    \@addtoreset{table}{section}
+    Tbl\ \thechapter.\arabic{table}}
+    \@addtoreset{table}{chapter}
 
-    \@addtoreset{lstlisting}{section}
+    \@addtoreset{lstlisting}{chapter}
 \makeatother
 \title{\vspace{-2cm}{\normalsize 情報学群実験第2 レポート}\\\vspace{0.5em}アセンブリ言語による整列アルゴリズムに関する実験}
 \author{1250373 溝口洸熙\thanks{高知工科大学 情報学群 2年 清水研究室}}
 \date{\today}
-
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{section}}
 \begin{document}
 \maketitle
 \pagenumbering{roman}\pagestyle{plain}
@@ -111,7 +112,6 @@
 \input{syaji.tex}
 \phantomsection
 \bibliography{bib}
-\addcontentsline{toc}{section}{\refname}
 \newpage
 \phantomsection
 \input{source.tex}
