@@ -1,11 +1,11 @@
-\section{アセンブリ言語による整列アルゴリズム記述可否の検証}
-\subsection{実験の目的}
+\chapter{アセンブリ言語による整列アルゴリズム記述可否の検証}
+\section{実験の目的}
 高級プログラミング言語，{\ttfamily Java, C, Python}などは，『コンパイラ』と呼ばれる装置を通して機械語に書き換えられ，コンピュータで実行されている．\par
 それに対して，アセンブリ言語は各機械語命令につけられた「意味する名前」（ニーモニック；mnemonic）を使ってプログラムを表記する表記法である．\cite{pl2text}
 また，アセンブリ言語表記を機械語のビット列に変換する作業をアセンブルと言い，それを行うソフトウェアをアセンブラと言う．
 つまり，コンパイラとアセンブラは別物であり，アセンブラは機械語の表記を変えたものである故にコンピュータへの命令を1対1で書き換えるものである点がコンパイラと大きく違う点である．\par
 本実験課題の目的は，このようなアセンブリ言語・機械語に対して，コンパイラを使わずに整列アルゴリズムを直接技術することが可能であるか確認することである．
-\subsection{プログラムの仕様}
+\section{プログラムの仕様}
 \(0\)以上\(2^{31}\)未満の自然数列に対して昇順に整列するアルゴリズムをアセンブリ言語で記述する．その際，\testsort ファイルが\sort サブルーチンを呼び出して整列を行う．
 検証したい自然数列は，\testsort 内の{\ttfamily data1}にダブルワードで，データの個数は{\ttfamily ndata1}で定義しており，\testsort 実行時{\ttfamily data1}に格納してある自然数列が\print サブルーチンによって出力される．\par
 {\ttfamily data1}の先頭番地は{\ttfamily EBX}，{\ttfamily ndata1}は{\ttfamily ECX}に格納する．\sort の呼び出し前後で他の汎用レジスタの値は変化しないように設計されている．内部処理の概要を\ref{kadai1:abs}に示す．整列アルゴリズムは，\textbf{バブルソート}\footnote{バブルソートの簡単な説明}アルゴリズムを元に作成している．
@@ -27,8 +27,8 @@
         \node[inner sep=0.2cm,fit={(print)(call)},draw,dotted](){};
     \end{tikzpicture}
 \end{figure}
-\subsection{実験}
-\subsubsection{実験方法}
+\section{実験}
+\subsection{実験方法}
 \ref{usingPC}に示すコンピュータを利用して，アセンブリ言語で書いた整列プログラムを実行可能ファイルに変換し実行した．
 実行結果を確認し，整列されているか確認するとともに，{\ttfamily Java}で記述したプログラムとアセンブリプログラムを比較してどの部分をどのようにアセンブリ言語化したかを確認する．
 \begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={Bash},caption={使用したコンピュータ},label={usingPC}]
@@ -41,7 +41,7 @@ $ nasm -felf print_eax.s ; nasm -felf test_sort.s ; nasm -felf sort.s
 $ ld -m elf_i386 print_eax.o test_sort.o sort.o
 $ ./a.out
 \end{lstlisting}
-\subsubsection{実験結果}
+\subsection{実験結果}
 実験結果と期待される結果を\ref{tbl:execute}に示す．これからわかるように，自然数列を昇順に整列されていることが確認できる．\par
 \begin{table}[h]
     \centering
@@ -128,6 +128,6 @@ loop0:
     jmp   loop0
 \end{lstlisting}
 \end{minipage}
-\subsection{考察}
+\section{考察}
 実験結果より自然数列を整列アルゴリズムをアセンブリ言語で記述できることがわかった．\par
 ただ，これはあくまで\(0\)以上\(2^{31}\)未満の自然数に限った整列アルゴリズムであるため，負の整数やその他の有理数などを対象にした整列アルゴリズムが記述可能であるかは，この実験では検証できていない．
