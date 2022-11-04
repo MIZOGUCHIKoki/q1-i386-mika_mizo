@@ -42,28 +42,28 @@ pushheap:
     pop esi
     pop eax
 
-    ; swap(data[k], data[k/2])
-    mov edi,  [ebx + edi*4]   ; edi = data[k]
-    mov [edx+8],  edi         ; i = data[k]
-    mov edi,  [ebx + edi*2]   ; edi = data[k/2]
-    mov [ebx + edi*4],  edi
-    mov edi,  [edx + 8]       ; edi = i
-    mov [ebx + edi*2],  edi   ; data[k/2] = i
+  ;  ; swap(data[k], data[k/2])
+  ;  mov edi,  [ebx + edi*4]   ; edi = data[k]
+  ;  mov [edx+8],  edi         ; i = data[k]
+  ;  mov edi,  [ebx + edi*2]   ; edi = data[k/2]
+  ;  mov [ebx + edi*4],  edi
+  ;  mov edi,  [edx + 8]       ; edi = i
+  ;  mov [ebx + edi*2],  edi   ; data[k/2] = i
 
-    push  ecx
-    push  esi
-    push  eax
-    push  edx
-      mov edx,  0
-      mov eax,  edi
-      mov ecx,  2
-      div ecx
-      mov [var+4],  eax
-    pop  edx
-    pop  eax
-    pop  esi
-    pop  ecx
-    jmp   while
+  ;  push  ecx
+  ;  push  esi
+  ;  push  eax
+  ;  push  edx
+  ;    mov edx,  0
+  ;    mov eax,  edi
+  ;    mov ecx,  2
+  ;    div ecx
+  ;    mov [var+4],  eax
+  ;  pop  edx
+  ;  pop  eax
+  ;  pop  esi
+  ;  pop  ecx
+  ;  jmp   while
 
 
     endw:
