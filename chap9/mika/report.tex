@@ -64,11 +64,14 @@ $ ld -m elf_i386 print_eax.o test_sort.o sort.o
 $ ./a.out
 \end{lstlisting}
 
+\newpage
+
 \section{実験結果}
-\begin{table}[t]
+\begin{table}[h]
   \centering
    \begin{minipage}{0.45\textwidth}
-     a.outを実行した結果，右のような結果が得られた．
+     a.outを実行した結果，右のような結果が得られた．\\
+     この結果から，正しく動作していると考えられる．
    \end{minipage}
    \begin{minipage}{0.45\textwidth}
      \centering
@@ -80,6 +83,7 @@ $ ./a.out
    \end{minipage}
 \end{table}
 
-       
+\section{考察}
+実験結果から，「1以上30万個以下の0以上$2^{32}$未満のダブルワード」に関してはアセンブリ言語でソートアルゴリズムが記述可能であると言える．この条件を満たさない場合のソートアルゴリズムも記述可能であるかは定かでない．
 
 \end{document}
