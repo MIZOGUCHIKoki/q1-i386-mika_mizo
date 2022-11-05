@@ -1,6 +1,6 @@
 \chapter{低級言語での理論的計算量に関する実験}
 \section{実験の目的}
-今回の実験の目的は，アセンブリ言語・機械語で直接記述した場合も実行時間は論理的計算量（アルゴリズムによって\(O(n^2)\)や\(O(n\log n)\)など）に従うことを示すことである．
+今回の実験の目的は，アセンブリ言語・機械語で直接記述した場合も実行時間は論理的計算量（アルゴリズムによって\(O(n^2)\)や\(O(n\log n)\)など）に従うことを示すことである．選択ソートのアルゴリズムの計算量は\(O(n^2)\)である\cite[p.50,51]{アルゴリズムとデータ構造}ので，アセンブリ言語で記述した選択ソートアルゴリズムもそれに従うか検証する．
 \section{実験方法}
 実験環境は，\ref{usingPC}に示した通り．アセンブリ言語での実行時間の検証は，Linux標準の{\ttfamily time}コマンドを用いて計測する．\ref{command1}のコマンドを実行し，実行ファイル{\ttfamily a.out}を生成した後，\ref{src:command3}を実行し実行時間を計測する．
 各実行時間の中でも{\ttfamily real}が引数コマンドを実行するのにかかった時間である．実験回数は1つのテストにつき3回行い実行時間を平均する．
@@ -12,7 +12,7 @@ user    0m0.001s
 sys     0m0.000s
 \end{lstlisting}
 テストするデータの個数を以下のように定め，\ref{src:sort.s}の{\ttfamily section .data}部分を\ref{src:データの個数指定}のように変更する．
-さらに，選択ソートは最良時間計算量と最悪時間計算量が等しく，整列対象のデータ列は計測時間に依存しない故，今回はデータ列を全て{\ttfamily 0}に定める．
+さらに，選択ソートは最良時間計算量と最悪時間計算量が等しく\cite[p.50]{アルゴリズムとデータ構造}，整列対象のデータ列は計測時間に依存しない故，今回はデータ列を全て{\ttfamily 0}に定める．
 \begin{align*}
     T_1 & =\{10^n\mid n\in\mathbb{N}, n\leq 5\} \\
     T_2 & =\{n\times 10^4\mid 2\leq n\leq 9\}   \\
@@ -24,66 +24,46 @@ data: times データ個数 dd 0
 ndata: equ ($ - data) / 4
 \end{lstlisting}
 \section{実験結果}
-実験結果を\ref{fig:データの個数と実行時間の曲線グラフ}，\ref{tbl:データの個数と実行時間の出力}に示す．\\
-\begin{minipage}{0.3\textwidth}
+実験結果を\ref{tbl:データの個数と実行時間の出力}，\ref{fig:データの個数と実行時間の曲線グラフ}に示す．実行時間は有効数字4桁で表現している．\\
+\dotfill\\
+\begin{minipage}[t]{0.35\textwidth}
     \begin{center}
-        % \tblcation{データの個数と実行時間の出力}
+        \tblcaption{データの個数と実行時間の出力}
+        \label{tbl:データの個数と実行時間の出力}
         \begin{tabular}{ll}
-            \multicolumn{1}{c}{データ個数} & \multicolumn{1}{c}{実行時間} \\
+            \multicolumn{1}{c}{データ個数（個）} & \multicolumn{1}{c}{実行時間（秒）} \\
             \hline
-            1                         & 0.001                    \\
-            10                        & 0.001                    \\
-            100                       & 0.002                    \\
-            1,000                     & 0.0073                   \\
-            10,000                    & 0.1873                   \\
-            20,000                    & 0.6077                   \\
-            30,000                    & 1.2164                   \\
-            40,000                    & 2.0527                   \\
-            50,000                    & 2.7173                   \\
-            60,000                    & 3.7017                   \\
-            70,000                    & 4.8357                   \\
-            80,000                    & 5.9860                   \\
-            90,000                    & 7.3787                   \\
-            100,000                   & 8.8790                   \\
+            1                            & 0.0010                      \\
+            10                           & 0.0010                      \\
+            100                          & 0.0020                      \\
+            1,000                        & 0.0073                      \\
+            10,000                       & 0.1873                      \\
+            20,000                       & 0.6077                      \\
+            30,000                       & 1.2164                      \\
+            40,000                       & 2.0527                      \\
+            50,000                       & 2.7173                      \\
+            60,000                       & 3.7017                      \\
+            70,000                       & 4.8357                      \\
+            80,000                       & 5.9860                      \\
+            90,000                       & 7.3787                      \\
+            100,000                      & 8.8790                      \\
             \hline
         \end{tabular}
     \end{center}
 \end{minipage}
-\begin{figure}[h]
+\begin{minipage}[t]{0.6\textwidth}
     \centering
-    \caption{データの個数と実行時間の曲線グラフ}
+    \figcaption{データの個数と実行時間の曲線グラフ}
     \label{fig:データの個数と実行時間の曲線グラフ}
-    \begin{tikzpicture}
+    \begin{tikzpicture}[scale=0.9]
         \datavisualization[ % コマンドで描画情報を記述
             scientific axes, % 軸設定
             visualize as smooth line, % 曲線で結ぶ
             x axis={label={データ個数（個）},length=10cm},
-            y axis={label={秒数（秒）},ticks={step=0.5},ticks={many},length=7cm},
+            y axis={label={秒数（秒）},ticks={step=0.5},length=7cm},
         ]
         data[headline={x, y}, read from file=exdata.csv];
     \end{tikzpicture}
-\end{figure}
-\begin{table}[h]
-    \centering
-    \caption{データの個数と実行時間の出力}
-    \label{tbl:データの個数と実行時間の出力}
-    \begin{tabular}{ll}
-        \multicolumn{1}{c}{データ個数} & \multicolumn{1}{c}{実行時間} \\
-        \hline
-        1                         & 0.001                    \\
-        10                        & 0.001                    \\
-        100                       & 0.002                    \\
-        1,000                     & 0.0073                   \\
-        10,000                    & 0.1873                   \\
-        20,000                    & 0.6077                   \\
-        30,000                    & 1.2164                   \\
-        40,000                    & 2.0527                   \\
-        50,000                    & 2.7173                   \\
-        60,000                    & 3.7017                   \\
-        70,000                    & 4.8357                   \\
-        80,000                    & 5.9860                   \\
-        90,000                    & 7.3787                   \\
-        100,000                   & 8.8790                   \\
-        \hline
-    \end{tabular}
-\end{table}
+\end{minipage}
+\section{考察}
+実験結果より，
