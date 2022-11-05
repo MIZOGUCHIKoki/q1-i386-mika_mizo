@@ -14,4 +14,3 @@ clean:
 
 test: test_sort answer.txt
 	./test_sort | diff - answer.txt
-	make clean
