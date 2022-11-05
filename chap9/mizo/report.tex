@@ -80,6 +80,8 @@
     \@addtoreset{table}{chapter}
 
     \@addtoreset{lstlisting}{chapter}
+    \newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}}
+    \newcommand{\tblcaption}[1]{\def\@captype{table}\caption{#1}}
 \makeatother
 \title{\vspace{-2cm}{\normalsize 情報学群実験第2 レポート}\\\vspace{0.5em}アセンブリ言語による整列アルゴリズムに関する実験}
 \author{1250373 溝口洸熙\thanks{高知工科大学 情報学群 2年 清水研究室}}
