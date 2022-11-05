@@ -1,13 +1,14 @@
-\documentclass[luatex,unicode,paper=a4,11pt]{ltjsreport}
+\documentclass[11pt]{ltjsreport}
 \usepackage{amsmath,amsfonts,amssymb,mathtools,ascmac,bm,fancybox,calc,multicol,array}
 \usepackage[top=20truemm,bottom=20truemm,left=15truemm,right=15truemm]{geometry}
 \usepackage{graphicx,color}
 \usepackage{tikz,listings,wrapfig,float,xcolor}
-\usepackage{url,multirow,framed,subcaption}
+\usepackage{url,multirow,framed}
 \usepackage[unicode=true,hidelinks,pdfusetitle,bookmarks,hypertexnames=false,debug]{hyperref}
 \usepackage{bookmark}
 \usepackage{luatexja-fontspec}
 \usepackage{tcolorbox,listings}
+\usepackage{type1cm}
 \bibliographystyle{junsrt}
 \hypersetup{
     colorlinks=true,
@@ -67,7 +68,7 @@
 }
 \lstdefinelanguage{Bash}{
     morekeywords=[1]{
-        nasm,ld,uname
+        nasm,ld,uname,time
     },
     sensitive=true
 }
@@ -87,32 +88,22 @@
 \date{\today}
 \renewcommand{\thechapter}{\arabic{chapter}}
 \renewcommand{\thesection}{\arabic{section}}
-\begin{document}
-\maketitle
-\pagenumbering{roman}\pagestyle{plain}
-\setcounter{tocdepth}{3}
-\tableofcontents
-
-\newpage
 \newcommand{\testsort}{{\ttfamily test\_sort.s}}
 \newcommand{\sort}{{\ttfamily sort}}
 \newcommand{\print}{{\ttfamily print\_eax}}
+\begin{document}
+\maketitle
+\clearpage
+\pagenumbering{roman}\pagestyle{plain}
+\tableofcontents
+\clearpage
+
 \setcounter{page}{0}
 \pagenumbering{arabic}
 \input{kadai1.tex}
-\newpage
-
 \input{kadai2.tex}
-\newpage
 \input{kadai3.tex}
-\newpage
-
-
-\phantomsection
 \input{syaji.tex}
-\phantomsection
 \bibliography{bib}
-\newpage
-\phantomsection
 \input{source.tex}
 \end{document}

@@ -1,3 +1,19 @@
-\chapter{低級言語での理論的計算量の検証}
+\chapter{低級言語での理論的計算量に関する実験}
 \section{実験の目的}
-理論的計算量とは，
+今回の実験の目的は，アセンブリ言語・機械語で直接記述した場合も実行時間は論理的計算量（アルゴリズムによって\(O(n^2)\)や\(O(n\log n)\)など）に従うことを示すことである．
+\section{実験方法}
+実験環境は，\ref{usingPC}に示した通り．アセンブリ言語での実行時間の検証は，Linux標準の{\ttfamily time}コマンドを用いて計測する．\ref{command1}のコマンドを実行し，実行ファイル{\ttfamily a.out}を生成した後，\ref{src:command3}を実行し実行時間を計測する．
+各実行時間の中でも{\ttfamily real}が引数コマンドを実行するのにかかった時間である．実験回数は1つのテストにつき3回行い実行時間を平均する．
+\begin{lstlisting}[language={Bash},caption={実行コマンド},label={src:command3},frame={single},numbers={none}]
+$ time ./a.out
+-- 実行結果（略）--
+real    0m0.002s
+user    0m0.001s
+sys     0m0.000s
+\end{lstlisting}
+テストするデータ数は以下のように定める．
+\begin{align*}
+    T_1       & =\{10^n\mid n\in\mathbb{N}, n\leq 5\} \\
+    T_2       & =\{n\times 10^4\mid 2\leq n\leq 9\}   \\
+    {テストデータ数} & =T_1\cup T_2
+\end{align*}
