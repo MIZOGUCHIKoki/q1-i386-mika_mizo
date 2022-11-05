@@ -1,5 +1,6 @@
-\documentclass{jsreport}
+\documentclass[10pt,a4j]{jsreport}
 \usepackage{url}
+\usepackage{float}
 \usepackage{listings,jvlisting}
 \lstset{
   basicstyle={\ttfamily},
@@ -19,7 +20,7 @@
   numbersep=1zw,
   lineskip=-0.5ex
 }
-
+\setcounter{chapter}{-1}
 
 \title{情報学郡実験第2 アセンブリ言語を用いたソートアルゴリズムの実装}
 \author{1250372 三上柊}
@@ -27,63 +28,13 @@
 \begin{document}
 \maketitle
 
-\chapter{本課題に関して}
-本課題で作成するアルゴリズムが満たすべき条件は，
-\begin{itemize}
-\item 指定された主記憶領域のダブルワード列を\textbf{昇順}に整列すること
-\item 整列対象の先頭番地がebxに，ダブルワードの個数がecxに格納されてsortに渡される
-\item sortはebxが指す番地から始まるecx個のダブルワードからなる領域の中身を書き換える
-\item 整列対象のダブルワードは$0$以上$2^{31}$未満である
-\item ダブルワードの個数は1個以上30万個以下である
-\item sort.s には，サブルーチン sort の定義（及び，整列対象以外にこのサブルーチンが必要とするデータ領域等の定義）のみ記述すること。特に，sort.s の中でラベル \_start を定義してはいけない。
-\item ラベル sort をglobal宣言すること。
-  \item sort は，標準出力に何も出力しないこと。
-  \item sort の呼び出し前と復帰後で汎用レジスタの値が変化しないようにすること。
-\end{itemize}
-である．これを満たすよう作成したソートアルゴリズム（sort.s）に対して実験を行う．
+\input{first.tex}
 
-\chapter{コンパイラを使用せず，アセンブリ，機械語のみでのソートアルゴリズムの記述}
-\section{目的}
-この実験の目的は,「コンパイラを使用せず，アセンブリ，機械語のみでソートアルゴリズムを記述することが可能である」ことを示すことである.
+\input{kadai1.tex}
 
-\section{方法}
-第1章に示した条件を満たすよう，高級言語で記述したものと同じ挙動をするようなソートアルゴリズムを記述する．また，使用したコンピュータ，実行コマンドは以下である．
-\begin{center}
-\begin{lstlisting}[numbers={none}, caption={使用したコンピュータ}]
-$ uname -a
-Linux KUT20VLIN-403 5.4.0-70-generic #78~18.04.1-Ubuntu SMP Sat Mar 20 14:10:07 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
-\end{lstlisting}
-\end{center}
+\input{kadai2.tex}
 
-print\_eax.s，test\_sort.s，sort.sに対して以下を行う．
-\begin{lstlisting}[numbers={none}, caption={実行コマンド}]
-$ nasm -felf print_eax.s
-$ nasm -felf test_sort.s
-$ nasm -felf sort.s
-$ ld -m elf_i386 print_eax.o test_sort.o sort.o
-$ ./a.out
-\end{lstlisting}
 
-\newpage
 
-\section{実験結果}
-\begin{table}[h]
-  \centering
-   \begin{minipage}{0.45\textwidth}
-     a.outを実行した結果，右のような結果が得られた．\\
-     この結果から，正しく動作していると考えられる．
-   \end{minipage}
-   \begin{minipage}{0.45\textwidth}
-     \centering
-     \begin{tabular}{c|cccccccccccc}
-       入力 & 1 & 3 & 5 & 7 & 9 & 2 & 4 & 6 & 8 & 0 & 1 & 2\\\hline
-       出力 & 0 & 1 & 1 & 2 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9\\
-       期待出力 & 0 & 1 & 1 & 2 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9\\
-     \end{tabular}
-   \end{minipage}
-\end{table}
-
-\section{考察}
-実験結果から，「1以上30万個以下の0以上$2^{32}$未満のダブルワード」に関してはアセンブリ言語でソートアルゴリズムが記述可能であると言える．この条件を満たさない場合のソートアルゴリズムも記述可能であるかは定かでない．
 
 \end{document}
