@@ -22,5 +22,5 @@ endp:
   int 0x80
 
   section .data
-data:  dd 1,3, 5, 7, 9, 2, 4, 6, 8, 0, 1, 2
+data:  dd 1, 3, 5, 7, 9, 2, 4, 6, 8, 0, 1, 2
 ndata  equ ($ - data) / 4
