@@ -8,7 +8,7 @@
 \section{プログラムの仕様}
 \(0\)以上\(2^{31}\)未満の自然数列に対して昇順に整列するアルゴリズムをアセンブリ言語で記述する．その際，\testsort ファイルが\sort サブルーチンを呼び出して整列を行う．
 検証したい自然数列は，\testsort 内の{\ttfamily data1}にダブルワードで，データの個数は{\ttfamily ndata1}で定義しており，\testsort 実行時{\ttfamily data1}に格納してある自然数列が\print サブルーチンによって出力される．\par
-{\ttfamily data1}の先頭番地は{\ttfamily EBX}，{\ttfamily ndata1}は{\ttfamily ECX}に格納する．\sort の呼び出し前後で他の汎用レジスタの値は変化しないように設計されている．内部処理の概要を\ref{kadai1:abs}に示す．整列アルゴリズムは，\textbf{バブルソート}\footnote{バブルソートの簡単な説明}アルゴリズムを元に作成している．
+{\ttfamily data1}の先頭番地は{\ttfamily EBX}，{\ttfamily ndata1}は{\ttfamily ECX}に格納する．\sort の呼び出し前後で他の汎用レジスタの値は変化しないように設計されている．内部処理の概要を\ref{kadai1:abs}に示す．整列アルゴリズムは，\textbf{選択ソート}\footnote{選択ソートの簡単な説明}アルゴリズムを元に作成している．
 \begin{figure}[H]
     \centering
     \caption{処理概要}
@@ -58,7 +58,7 @@ $ ./a.out
         期待出力 & {\ttfamily 0 1 1 2 2 3 4 5 6 7 8 9}
     \end{tabular}
 \end{table}
-{\ttfamily Java}で記述したバブルソート（\ref{src:java_buble}）と，アセンブリ言語で記述したバブルソート（\ref{src:assembuly_buble}）を比較して，言語化の箇所を確認する．前者は入力データ列を{\ttfamily data}とし，後者は{\ttfamily EBX}に入力データ列の先頭番地，{\ttfamily ECX}入力データ列の個数を格納している．ソースコードの各処理の内容と，2つの言語による対応を\ref{tbl:ソースコードの行対応}に記す．
+{\ttfamily Java}で記述した選択ソート（\ref{src:java_buble}）と，アセンブリ言語で記述した選択ソート（\ref{src:assembuly_buble}）を比較して，言語化の箇所を確認する．前者は入力データ列を{\ttfamily data}とし，後者は{\ttfamily EBX}に入力データ列の先頭番地，{\ttfamily ECX}入力データ列の個数を格納している．ソースコードの各処理の内容と，2つの言語による対応を\ref{tbl:ソースコードの行対応}に記す．
 \begin{table}[htbp]
     \centering
     \caption{ソースコードの行対応}

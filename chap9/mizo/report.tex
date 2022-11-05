@@ -16,14 +16,13 @@
     linkcolor=black,
     urlcolor=blue
 }
-    \usetikzlibrary{intersections,calc,arrows.meta,backgrounds,shapes.geometric,shapes.misc,positioning,fit,graphs,arrows}
+    \usetikzlibrary{intersections,calc,arrows.meta,backgrounds,shapes.geometric,shapes.misc,positioning,fit,graphs,arrows,plotmarks,fpu,datavisualization}
     \tcbuselibrary{raster,skins,breakable,theorems}
     \setlength{\columnsep}{5mm}
     \columnseprule=0.1mm
     \renewcommand{\indent}{1\zw}
     \setlength{\parindent}{1\zw}
     \ltjsetparameter{jacharrange={-2}} %日本語以外を欧文扱い
-
     \renewcommand{\thefootnote}{*\arabic{footnote}}
 \renewcommand{\lstlistingname}{}
 \renewcommand{\figurename}{}
@@ -72,7 +71,6 @@
     },
     sensitive=true
 }
-
 \makeatletter
     \renewcommand{\thefigure}{%
     Fig\ \thechapter.\arabic{figure}}

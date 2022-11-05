@@ -11,9 +11,77 @@ real    0m0.002s
 user    0m0.001s
 sys     0m0.000s
 \end{lstlisting}
-テストするデータ数は以下のように定める．
+テストするデータの個数を以下のように定め，\ref{src:sort.s}の{\ttfamily section .data}部分を\ref{src:データの個数指定}のように変更する．
+さらに，選択ソートは最良時間計算量と最悪時間計算量が等しく，整列対象のデータ列は計測時間に依存しない故，今回はデータ列を全て{\ttfamily 0}に定める．
 \begin{align*}
-    T_1       & =\{10^n\mid n\in\mathbb{N}, n\leq 5\} \\
-    T_2       & =\{n\times 10^4\mid 2\leq n\leq 9\}   \\
-    {テストデータ数} & =T_1\cup T_2
+    T_1 & =\{10^n\mid n\in\mathbb{N}, n\leq 5\} \\
+    T_2 & =\{n\times 10^4\mid 2\leq n\leq 9\}   \\
+    T   & =T_1\cup T_2\tag*{(データ数)}
 \end{align*}
+\begin{lstlisting}[caption={データの個数指定}, label={src:データの個数指定},frame={single},numbers={none}]
+    section .data
+data: times データ個数 dd 0
+ndata: equ ($ - data) / 4
+\end{lstlisting}
+\section{実験結果}
+実験結果を\ref{fig:データの個数と実行時間の曲線グラフ}，\ref{tbl:データの個数と実行時間の出力}に示す．\\
+\begin{minipage}{0.3\textwidth}
+    \centering
+    \begin{tabular}{ll}
+        \multicolumn{1}{c}{データ個数} & \multicolumn{1}{c}{実行時間} \\
+        \hline
+        1                         & 0.001                    \\
+        10                        & 0.001                    \\
+        100                       & 0.002                    \\
+        1,000                     & 0.0073                   \\
+        10,000                    & 0.1873                   \\
+        20,000                    & 0.6077                   \\
+        30,000                    & 1.2164                   \\
+        40,000                    & 2.0527                   \\
+        50,000                    & 2.7173                   \\
+        60,000                    & 3.7017                   \\
+        70,000                    & 4.8357                   \\
+        80,000                    & 5.9860                   \\
+        90,000                    & 7.3787                   \\
+        100,000                   & 8.8790                   \\
+        \hline
+    \end{tabular}
+\end{minipage}
+\begin{figure}[h]
+    \centering
+    \caption{データの個数と実行時間の曲線グラフ}
+    \label{fig:データの個数と実行時間の曲線グラフ}
+    \begin{tikzpicture}
+        \datavisualization[ % コマンドで描画情報を記述
+            scientific axes, % 軸設定
+            visualize as smooth line, % 曲線で結ぶ
+            x axis={label={データ個数（個）},length=10cm},
+            y axis={label={秒数（秒）},ticks={step=0.5},ticks={many},length=7cm},
+        ]
+        data[headline={x, y}, read from file=exdata.csv];
+    \end{tikzpicture}
+\end{figure}
+\begin{table}[h]
+    \centering
+    \caption{データの個数と実行時間の出力}
+    \label{tbl:データの個数と実行時間の出力}
+    \begin{tabular}{ll}
+        \multicolumn{1}{c}{データ個数} & \multicolumn{1}{c}{実行時間} \\
+        \hline
+        1                         & 0.001                    \\
+        10                        & 0.001                    \\
+        100                       & 0.002                    \\
+        1,000                     & 0.0073                   \\
+        10,000                    & 0.1873                   \\
+        20,000                    & 0.6077                   \\
+        30,000                    & 1.2164                   \\
+        40,000                    & 2.0527                   \\
+        50,000                    & 2.7173                   \\
+        60,000                    & 3.7017                   \\
+        70,000                    & 4.8357                   \\
+        80,000                    & 5.9860                   \\
+        90,000                    & 7.3787                   \\
+        100,000                   & 8.8790                   \\
+        \hline
+    \end{tabular}
+\end{table}
