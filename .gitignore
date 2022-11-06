@@ -74,3 +74,4 @@
 *.sh
 *.ign
 .nfs*
+.DS_Store

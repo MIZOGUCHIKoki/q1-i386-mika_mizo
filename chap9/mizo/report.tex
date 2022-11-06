@@ -65,11 +65,12 @@
         %タブの大きさ
     tabsize = 4,
         %キャプションの場所(tbならば上下両方に記載)
-    captionpos = t
+    captionpos = t,
+    moredelim=**[is][\color{black}]{~}{~},
 }
 \lstdefinelanguage{Bash}{
     morekeywords=[1]{
-        nasm,ld,uname,time
+        nasm,ld,uname,time,java
     },
     sensitive=true
 }

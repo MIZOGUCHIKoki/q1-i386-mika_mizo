@@ -1,7 +1,7 @@
-\chapter{低級言語での理論的計算量に関する実験}
+\chapter{低級言語での理論的計算量に関する実験}\label{chap:時間計測}
 \section{実験の目的}
 今回の実験の目的は，アセンブリ言語・機械語で直接記述した場合も実行時間は論理的計算量（アルゴリズムによって\(O(n^2)\)や\(O(n\log n)\)など）に従うことを示すことである．選択ソートのアルゴリズムの計算量は\(O(n^2)\)である\cite[p.50,51]{アルゴリズムとデータ構造}ので，アセンブリ言語で記述した選択ソートアルゴリズムもそれに従うか検証する．
-\section{実験方法}
+\section{実験方法}\label{sec:時間計測}
 実験環境は，\ref{usingPC}に示した通り．アセンブリ言語での実行時間の検証は，Linux標準の{\ttfamily time}コマンドを用いて計測する．\ref{command1}のコマンドを実行し，実行ファイル{\ttfamily a.out}を生成した後，\ref{src:command3}を実行し実行時間を計測する．
 各実行時間の中でも{\ttfamily real}が引数コマンドを実行するのにかかった時間である．実験回数は1つのテストにつき3回行い実行時間を平均する．
 \begin{lstlisting}[language={Bash},caption={実行コマンド},label={src:command3},frame={single},numbers={none}]
@@ -13,12 +13,12 @@ sys     0m0.000s
 \end{lstlisting}
 テストするデータの個数を以下のように定め，\ref{src:sort.s}の{\ttfamily section .data}部分を\ref{src:データの個数指定}のように変更する．
 さらに，選択ソートは最良時間計算量と最悪時間計算量が等しく\cite[p.50]{アルゴリズムとデータ構造}，整列対象のデータ列は計測時間に依存しない故，今回はデータ列を全て{\ttfamily 0}に定める．
-実験結果をExcelを使って多項式近似（2次）を求め，その関数曲線と実験結果を比較する．
-\begin{align*}
-    T_1 & =\{10^n\mid n\in\mathbb{N}, n\leq 5\} \\
-    T_2 & =\{n\times 10^4\mid 2\leq n\leq 9\}   \\
-    T   & =T_1\cup T_2\tag*{(テストするデータ数の集合)}
-\end{align*}
+実験結果をExcelを使って多項式近似（2次）を求め，その関数曲線と実験結果を比較する．テストデータ数は\eqref{equ:テストデータ}の集合\(T\)である．
+\begin{align}
+    T_1 & =\{10^n\mid n\in\mathbb{N}, n\leq 5\} \notag \\
+    T_2 & =\{n\times 10^4\mid 2\leq n\leq 9\}  \notag  \\
+    T   & =T_1\cup T_2\label{equ:テストデータ}
+\end{align}
 \begin{lstlisting}[caption={データの個数指定}, label={src:データの個数指定},frame={single},numbers={none}]
     section .data
 data: times データ個数 dd 0

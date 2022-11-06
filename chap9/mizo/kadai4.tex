@@ -1,4 +1,35 @@
 \chapter{高級言語と低級言語の計算時間に関する検証}
 \section{実験の目的}
-高級言語での実装と比べて計算時間に差があるかどうかを明らかにする．
-\section{}
+アセンブリ言語と高級言語での実装を比べて計算時間に差があるかどうかを明らかにする．
+\section{実験の方法}
+実験環境は，\ref{usingPC}に示した通りである．{\ttfamily Java}のコンパイル・実行は\ref{src:javac}に示す．
+時間の計測方法は\ref{chap:時間計測}章\ref{sec:時間計測}節同様にコマンドの実行時間で計測し，整列対象のデータ列は全て{\ttfamily 0}とする．また，テストするデータ数を\eqref{equ:テストデータ}の集合\(T\)とし，3度同様の実験を行いその平均を結果とする．
+\begin{lstlisting}[caption={{\ttfamily Java}コンパイル・実行時間の計測}, label={src:javac}, language={Bash},frame={single},numbers={none}]
+$ javac sort.java
+$ time java sort
+\end{lstlisting}
+\section{実験結果}
+実験結果をに示す．実行時間は有効数字4桁で表現している．\\
+\begin{minipage}[t]{0.35\textwidth}
+    \centering
+    \tblcaption{データの個数と実行時間\ {\ttfamily Java}}
+    \label{tbl:データの個数と}
+\end{minipage}
+\begin{minipage}[t]{0.6\textwidth}
+    \centering
+    \figcaption{データの個数と実行時間の曲線グラフ 比較}
+    \label{fig:比較}
+    \begin{tikzpicture}[scale=0.9]
+        \datavisualization[
+            scientific axes,
+            visualize as line/.list={java,asm},
+            asm={style={thick,mark=,dashed},smooth line,label in legend={text=アセンブリ言語}},
+            java={style={thick,mark=},smooth line,label in legend={text={\ttfamily Java}}},
+            legend={north west inside},
+            x axis={label={データ個数（個）},length=10cm},
+            y axis={label={秒数（秒）},ticks={step=0.5},length=7cm},
+        ]
+        data[set=java,headline={x,y}, read from file=jexdata.csv]
+        data[set=asm,headline={x,y}, read from file=exdata.csv];
+    \end{tikzpicture}
+\end{minipage}
