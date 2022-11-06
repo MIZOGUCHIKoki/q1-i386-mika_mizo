@@ -13,7 +13,6 @@ public class sort {
         printArray(data1);
         buble(data1);
         System.out.println("buble sort");
-        printArray(data1);
     }
 
     private static void printArray(int[] array) {
