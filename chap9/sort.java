@@ -9,9 +9,6 @@ public class sort {
     static int big = 0;
 
     public static void main(String[] args) {
-        System.out.println("Original");
-        printArray(data1);
-        buble(data1);
         System.out.println("buble sort");
     }
 
