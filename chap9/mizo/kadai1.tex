@@ -41,8 +41,7 @@ GNU ld (GNU Binutils for Ubuntu) 2.30
 $ java --version
 openjdk 11.0.10 2021-01-19
 \end{lstlisting}
-\print{\ttfamily .s}，\testsort，\sort{\ttfamily .s}をそれぞれアセンブルして実行する．
-\begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={Bash},caption={実行したコマンド},label={command1}]
+\begin{lstlisting}[frame={single},numbers={none},breakindent={0pt},language={Bash},caption={アセンブル実行コマンド},label={command1}]
 $ nasm -felf print_eax.s ; nasm -felf test_sort.s ; nasm -felf sort.s
 $ ld -m elf_i386 print_eax.o test_sort.o sort.o
 $ ./a.out
@@ -79,7 +78,7 @@ $ ./a.out
 \end{table}\\
 \begin{minipage}[t]{0.5\linewidth}
     \centering
-    \begin{lstlisting}[caption={{\ttfamily Java}}, label={src:java_buble}, language={Java},frame={left}]
+    \begin{lstlisting}[caption={{\ttfamily Java}で記述した選択ソート}, label={src:java_buble}, language={Java},frame={left}]
 int max_index = 0;
 int max = 0;
 for (int i = data.length - 1; i > 0; i--) {
@@ -105,7 +104,7 @@ for (int i = data.length - 1; i > 0; i--) {
 \end{minipage}
 \hspace{3em}
 \begin{minipage}[t]{0.4\linewidth}
-    \begin{lstlisting}[frame={left},caption={アセンブリ},label={src:assembuly_buble}]
+    \begin{lstlisting}[frame={left},caption={アセンブリ言語で記述した選択ソート},label={src:assembuly_buble}]
 loop0:
   cmp   ecx,  0
   jle   endp
