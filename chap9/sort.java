@@ -1,5 +1,5 @@
 public class sort {
-    static int[] data1 = { -1, 1, 3, 5, 7, 9, 2, 4, 6, 8, 3, 1 };// 元々のデータ
+    static int[] data1 = {2};// 元々のデータ
     static int ndata = data1.length;// データの個数
     static int[] data1r = new int[ndata];// push_heap後
     static int size = 0;
@@ -9,7 +9,7 @@ public class sort {
     static int big = 0;
 
     public static void main(String[] args) {
-        System.out.println("buble sort");
+      buble(data1);
     }
 
     private static void printArray(int[] array) {
