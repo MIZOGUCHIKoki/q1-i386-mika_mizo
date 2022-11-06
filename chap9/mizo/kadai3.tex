@@ -13,10 +13,11 @@ sys     0m0.000s
 \end{lstlisting}
 テストするデータの個数を以下のように定め，\ref{src:sort.s}の{\ttfamily section .data}部分を\ref{src:データの個数指定}のように変更する．
 さらに，選択ソートは最良時間計算量と最悪時間計算量が等しく\cite[p.50]{アルゴリズムとデータ構造}，整列対象のデータ列は計測時間に依存しない故，今回はデータ列を全て{\ttfamily 0}に定める．
+実験結果をExcelを使って多項式近似（2次）を求め，その関数曲線と実験結果を比較する．
 \begin{align*}
     T_1 & =\{10^n\mid n\in\mathbb{N}, n\leq 5\} \\
     T_2 & =\{n\times 10^4\mid 2\leq n\leq 9\}   \\
-    T   & =T_1\cup T_2\tag*{(データ数)}
+    T   & =T_1\cup T_2\tag*{(テストするデータ数の集合)}
 \end{align*}
 \begin{lstlisting}[caption={データの個数指定}, label={src:データの個数指定},frame={single},numbers={none}]
     section .data
@@ -59,20 +60,21 @@ ndata: equ ($ - data) / 4
         \datavisualization[ % コマンドで描画情報を記述
             scientific axes, % 軸設定
             visualize as line/.list={mydata}, % 曲線で結ぶ
-            mydata={style={thick,mark=+},smooth line,label in legend={text=実験結果}},
+            mydata={style={thick,mark=*},smooth line,label in legend={text=実験結果}},
             legend={north west inside},
             x axis={label={データ個数（個）},length=10cm},
             y axis={label={秒数（秒）},ticks={step=0.5},length=7cm},
         ]
         data[set=mydata,headline={x, y}, read from file=exdata.csv];
         info{
-                % \draw plot(\x, {7 * pow(10,-10) * pow(\x,2) + 2 * pow(10,-5)\x - 0.0236});
+                % \draw[domain=0:100000] plot(\x, {7 * pow(10,-10) * (\x)^2 + 2 * pow(10,-5) * (\x) - 0.0236});
             }
     \end{tikzpicture}
+    \begin{align}
+        \intertext{実行時間を\(t\)，データの個数を\(n\)とすると，近似多項式は以下．}
+        t= 7\cdot 10^{-10}n^2+2\cdot 10^{-5}n-0.00236\label{equ:近似多項式}
+    \end{align}
 \end{minipage}
 \section{考察}
-\(n\)をデータ個数，\(t\)を実行時間，\(c\)を定数とする．\par
-実験結果より，データの個数が増すと実行時間は一定ではなく増加する．また，\(t=cn\)の比例関数でないことも明らかである．\par
-入力サイズ\(n\)に対してのアルゴリズムの計算量で用いられる代表的な関数の漸近的な大小関係は，
-\[\log n<\sqrt{n}<n<n\log n<n^2<n^3<\dots<2^n<n!\]
-であること\cite[p.7]{アルゴリズムとデータ構造}と実験結果を元に考えると，このアルゴリズムの計算量は\(O(n\log n)\)以上であることがわかる．ただし，実験結果を見る限り計算量が\(O(n^2)\)であると断定できない．
+オーダ記法は，アルゴリズムの時間計算量の入力サイズ\(n\)を用いた関数\(f(n)\)に対して，その関数の主要項の係数を削除した\(O(f(n))\)である．\cite[p.7]{アルゴリズムとデータ構造}\par
+従って，\eqref{equ:近似多項式}を元にオーダ記法の定義より，このアルゴリズムの計算量は\(O(n^2)\)であることが分かる．
