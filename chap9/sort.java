@@ -1,5 +1,5 @@
 public class sort {
-    static int[] data1 = {2};// 元々のデータ
+    static int[] data1 = new int[100001];// 元々のデータ
     static int ndata = data1.length;// データの個数
     static int[] data1r = new int[ndata];// push_heap後
     static int size = 0;
