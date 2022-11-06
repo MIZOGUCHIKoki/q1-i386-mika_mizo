@@ -2,34 +2,37 @@
 \section{実験の目的}
 アセンブリ言語と高級言語での実装を比べて計算時間に差があるかどうかを明らかにする．
 \section{実験の方法}
+データ数は，\ref{src:sort.java}の3行目を
+\begin{lstlisting}[caption={}, label={}, language={Java}, frame={none},numbers={none}]
+int[] data = new int[データ数];
+\end{lstlisting}
+とすることでデータ数に応じた実験ができる．\par
 実験環境は，\ref{usingPC}に示した通りである．{\ttfamily Java}のコンパイル・実行は\ref{src:javac}に示す．
-時間の計測方法は\ref{chap:時間計測}章\ref{sec:時間計測}節同様にコマンドの実行時間で計測し，整列対象のデータ列は全て{\ttfamily 0}とする．また，テストするデータ数を\eqref{equ:テストデータ}の集合\(T\)とし，3度同様の実験を行いその平均を結果とする．
 \begin{lstlisting}[caption={{\ttfamily Java}コンパイル・実行時間の計測}, label={src:javac}, language={Bash},frame={single},numbers={none}]
 $ javac sort.java
 $ time java sort
 \end{lstlisting}
 \section{実験結果}
-実験結果をに示す．実行時間は有効数字4桁で表現している．\\
-\begin{minipage}[t]{0.35\textwidth}
+実験結果を\ref{fig:比較}に示す．{\ttfamily Java}の実行時間実験結果詳細は，\ref{tblr:実行時間計測実験結果J}に掲載している．
+\begin{figure}[htb]
     \centering
-    \tblcaption{データの個数と実行時間\ {\ttfamily Java}}
-    \label{tbl:データの個数と}
-\end{minipage}
-\begin{minipage}[t]{0.6\textwidth}
-    \centering
-    \figcaption{データの個数と実行時間の曲線グラフ 比較}
+    \caption{各言語の実行時間比較}
     \label{fig:比較}
-    \begin{tikzpicture}[scale=0.9]
+    \begin{tikzpicture}
         \datavisualization[
             scientific axes,
             visualize as line/.list={java,asm},
             asm={style={thick,mark=,dashed},smooth line,label in legend={text=アセンブリ言語}},
             java={style={thick,mark=},smooth line,label in legend={text={\ttfamily Java}}},
             legend={north west inside},
-            x axis={label={データ個数（個）},length=10cm},
-            y axis={label={秒数（秒）},ticks={step=0.5},length=7cm},
+            x axis={label={データ個数（個）},length=14cm},
+            y axis={label={秒数（秒）},ticks={step=0.5},length=5cm},
         ]
-        data[set=java,headline={x,y}, read from file=jexdata.csv]
-        data[set=asm,headline={x,y}, read from file=exdata.csv];
+        data[set=java,headline={x,y}, read from file=exdataJ.csv]
+        data[set=asm,headline={x,y}, read from file=exdataA.csv];
     \end{tikzpicture}
-\end{minipage}
+\end{figure}
+\section{考察}
+実験結果より，アセンブリ言語で記述した選択ソートの方が{\ttfamily Java}で記述した選択ソートよりも実行時間が短いことがわかった．
+ただし，いずれも\ref{src:sort.java}，\ref{src:sort.s}のアルゴリズムでの実行時間であるので，一般的にアセンブリ言語の方が{\ttfamily Java}よりも実行時間が短いと示したことにはならない．\par
+{\ttfamily Java}はクラスファイルからの実行はインタプリタ方式をとっているため，機械語に翻訳された実行ファイルよりも実行に時間がかかると考えらえる．
