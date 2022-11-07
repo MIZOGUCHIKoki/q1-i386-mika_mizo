@@ -19,17 +19,23 @@ $ time java sort
     \caption{各言語の実行時間比較}
     \label{fig:比較}
     \begin{tikzpicture}
-        \datavisualization[
-            scientific axes,
-            visualize as line/.list={java,asm},
-            asm={style={thick,mark=,dashed},smooth line,label in legend={text=アセンブリ言語}},
-            java={style={thick,mark=},smooth line,label in legend={text={\ttfamily Java}}},
-            legend={north west inside},
-            x axis={label={データ個数（個）},length=14cm},
-            y axis={label={秒数（秒）},ticks={step=0.5},length=5cm},
-        ]
-        data[set=java,headline={x,y}, read from file=exdataJ.csv]
-        data[set=asm,headline={x,y}, read from file=exdataA.csv];
+        \begin{axis}[
+                ylabel={実行時間（秒）},
+                xlabel={データ個数（個）},
+                xmin = 0, ymin=0,
+                width=0.8\textwidth,
+                height=0.27\textheight,
+                legend=inner,
+                legend pos=north west,
+                ytick distance=0.5,
+                xmax=100000,
+                yticklabel style={font=\small},
+            ]
+            \addplot[black,thick,mark=*] table[x index=0,y index=1,col sep=comma]{exdataA.csv};
+            \addlegendentry{アセンブリ言語}
+            \addplot[black,thick,dashed,mark=square*,mark options={solid}]table[x index=0,y index=1, col sep=comma]{exdataJ.csv};
+            \addlegendentry{{\ttfamily Java}}
+        \end{axis}
     \end{tikzpicture}
 \end{figure}
 \section{考察}

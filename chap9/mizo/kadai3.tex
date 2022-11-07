@@ -52,19 +52,26 @@ ndata: equ ($ - data) / 4
     \caption{アセンブリ言語のデータの個数と実行時間の曲線グラフ}
     \label{fig:データの個数と実行時間の曲線グラフ}
     \begin{tikzpicture}
-        \datavisualization[ % コマンドで描画情報を記述
-            scientific axes, % 軸設定
-            visualize as line/.list={mydata}, % 曲線で結ぶ
-            mydata={style={thick,mark=*},smooth line,label in legend={text=実験結果}},
-            legend={north west inside},
-            x axis={label={データ個数（個）},length=14cm},
-            y axis={label={秒数（秒）},ticks={step=0.5},length=7cm},
-        ]
-        data[set=mydata,headline={x, y},read from file=exdataA.csv];
+        \begin{axis}[
+                xlabel={データ個数（個）\(n\)},
+                ylabel={実行時間（秒）\(t\)},
+                enlarge x limits=false,
+                width=0.9\textwidth,
+                height=0.3\textheight,
+                ytick distance=0.5,
+                ymin=0,
+                legend = inner,
+                legend pos=north west,
+            ]
+            \addplot[black,thick,mark=*] table[x index=0,y index=1, col sep=comma]{exdataA.csv};
+            \addlegendentry{実験結果}
+            \addplot[dotted,domain=0:100000,thin,mark=none,samples={300}] plot(\x, {6 * pow(10,-10) * (\x)^2 + 9 * pow(10,-7) * (\x) - 0.0004});
+            \addlegendentry{\(t=6\cdot 10^{-10}n^2+9\cdot 10^{-7}n-0.0004\)}
+        \end{axis}
     \end{tikzpicture}
 \end{figure}
 \begin{align}
-    \intertext{実行時間を\(t\)，データの個数を\(n\)とすると，近似多項式は以下．}
+    \intertext{実行時間を\(t\)，データの個数を\(n\)とすると，近似多項式は\eqref{equ:近似多項式}．}
     t= 6\cdot 10^{-10}n^2+9\cdot 10^{-7}n-0.0004\label{equ:近似多項式}
 \end{align}
 \section{考察}
