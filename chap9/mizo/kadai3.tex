@@ -63,7 +63,7 @@ ndata: equ ($ - data) / 4
                 legend = inner,
                 legend pos=north west,
             ]
-            \addplot[black,thick,mark=*] table[x index=0,y index=1, col sep=comma]{exdataA.csv};
+            \addplot[black,thick,mark=*] table[x=n, y=av, col sep=comma]{exdataA_all.csv};
             \addlegendentry{実験結果}
             \addplot[dashed,domain=0:100000,thin,mark=none,samples={300}] plot(\x, {6 * pow(10,-10) * (\x)^2 + 9 * pow(10,-7) * (\x) - 0.0004});
             \addlegendentry{\(t=6\cdot 10^{-10}n^2+9\cdot 10^{-7}n-0.0004\)}

@@ -31,9 +31,9 @@ $ time java sort
                 xmax=100000,
                 yticklabel style={font=\small},
             ]
-            \addplot[black,thick,mark=*] table[x index=0,y index=1,col sep=comma]{exdataA.csv};
+            \addplot[black,thick,mark=*] table[x=n,y=av,col sep=comma]{exdataA_all.csv};
             \addlegendentry{アセンブリ言語}
-            \addplot[black,thick,dashed,mark=square*,mark options={solid}]table[x index=0,y index=1, col sep=comma]{exdataJ.csv};
+            \addplot[black,thick,dashed,mark=square*,mark options={solid}]table[x=n,y=av, col sep=comma]{exdataJ_all.csv};
             \addlegendentry{{\ttfamily Java}}
         \end{axis}
     \end{tikzpicture}

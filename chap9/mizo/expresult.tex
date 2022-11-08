@@ -8,13 +8,13 @@
         \scalebox{0.7}{
             \begin{tabular}{lllll}
                 \hline
-                \multicolumn{1}{c}{\multirow{2}{*}{データ個数}} & \multicolumn{3}{|c|}{実行時間（秒）} & \multicolumn{1}{c}{\multirow{2}{*}{平均}}                                     \\
+                \multicolumn{1}{c}{\multirow{2}{*}{データ個数}} & \multicolumn{3}{|c|}{実行時間（秒）} & \multicolumn{1}{c}{\multirow{2}{*}{平均}}                                   \\
                 \cline{2-4}
-                                                           & \multicolumn{1}{|c}{1回目}      & \multicolumn{1}{c}{2回目}                 & \multicolumn{1}{c|}{3回目} &        \\
+                                                           & \multicolumn{1}{|c}{1回目}      & \multicolumn{1}{c}{2回目}                 & \multicolumn{1}{c|}{3回目} &      \\
                 \hline
-                \csvreader[no head,late after line=\\]{exdataA_all.csv}
-                {1=\one,2=\two,3=\three,4=\four,5=\five}
-                {\one                                      & \two                          & \three                                  & \four                    & \five}
+                \csvreader[late after line=\\]{exdataA_all.csv}
+                {n=\nn,t1=\ta,t2=\tb,t3=\tc,av=\av}
+                {\nn                                       & \ta                           & \tb                                     & \tc                      & \av}
                 \hline
             \end{tabular}
         }
@@ -30,8 +30,8 @@
                 \cline{2-4}
                                                            & \multicolumn{1}{|c}{1回目}      & \multicolumn{1}{c}{2回目}                 & \multicolumn{1}{c|}{3回目} &        \\
                 \hline
-                \csvreader[no head,late after line=\\]{exdataJ_all.csv}
-                {1=\one,2=\tow,3=\three,4=\four,5=\five}
+                \csvreader[late after line=\\]{exdataJ_all.csv}
+                {n=\one,t1=\tow,t2=\three,t3=\four,av=\five}
                 {\one                                      & \tow                          & \three                                  & \four                    & \five}
                 \hline
             \end{tabular}
