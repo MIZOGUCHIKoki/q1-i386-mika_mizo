@@ -6,7 +6,7 @@
 \section{実験方法}
 第0章に示した条件を満たすよう，高級言語で記述したものと同じ挙動をするようなソートアルゴリズムをアセンブリ言語で記述する．これを実行可能ファイルに変換し，期待された結果が出力されるか確認する．\\
 実行コマンドは以下であり．
-print\_eax.s，test\_sort.s，sort.sに対して操作を行う．
+print\_eax.s，test\_sort.s，sort.sに対して操作を行う．print\_eax.sはレジスタに保存された値を10進数で出力するものである．
 \begin{lstlisting}[numbers={none}, caption={実行コマンド}, label={fig:実行コマンド}]
 $ nasm -felf print_eax.s
 $ nasm -felf test_sort.s
@@ -31,6 +31,6 @@ $ ./a.out
      \end{tabular}
    \end{minipage}
 \end{table}
-
+\vspace{-0.5cm}
 \section{考察}
 実験結果から，「1以上30万個以下の0以上$2^{31}$未満のダブルワード」に関してはアセンブリ言語でソートアルゴリズムが記述可能であると言える．この条件を満たさない場合のソートアルゴリズムも記述可能であるかは定かでない．
