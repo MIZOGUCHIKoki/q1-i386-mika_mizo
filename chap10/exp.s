@@ -8,12 +8,12 @@
 _start:
   mov eax,  data
   mov edx,  data2
-  call  mul_10k
+  call  mul_edx
   call  print_eax
 
 mov eax,  1
 int 0x80
 
   section .data
-data: equ 2
-data2: equ 3
+data: equ 100
+data2: equ 20
