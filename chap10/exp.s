@@ -6,6 +6,10 @@
   extern  mul_edx
 
 _start:
+  call  print_eax_hex
 
 mov eax,  1
 int 0x80
+
+  section .data
+data: equ 200
