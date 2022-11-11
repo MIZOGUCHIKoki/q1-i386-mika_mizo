@@ -10,10 +10,23 @@ mul_10k:
 
 
 mov ebx,  eax
-shl eax,  4
-add eax,  ebx
-shl eax,  4
+mov ecx,  eax
+mov edx,  eax
+shl eax,  13
+shl ecx,  10
+add eax,  ecx
 
+mov ecx,  ebx
+shl ecx,  9
+add eax,  ecx
+
+mov ecx,  ebx
+shl ecx,  8
+add eax,  ecx
+
+mov ecx,  ebx
+shl ecx,  4
+add eax,  ecx
 
 endp:
   pop ebx
