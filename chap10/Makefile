@@ -7,6 +7,9 @@ testf: print_eax_hex.o mul_10k.o print_eax.o mul_edx.o exp.o
 %.o: %.s
 	$(AS) $<
 
+testo: FACT.o MULT.o exp2.o print_eax.o 
+	$(LD) $+ -o $@
+  
 .PHONY: clean test
 
 clean:
