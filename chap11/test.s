@@ -5,19 +5,21 @@
   extern  print_eax
 
 _start:
-  ;mov eax,  12
+  mov eax, -12
 
-  mov ebx,  data1
-  mov ecx,  ndata
+  ;mov ebx,  data1
+  ;mov ecx,  ndata
+  call  print_eax_int
+  ;mov eax,  -12
   ;call  print_eax_int
 
-  call  max_abs
-  call  print_eax
+  ;call  max_abs
+  ;call  print_eax
 
   mov eax,  1
   mov ebx,  0
   int 0x80
 
   section .data
-data1:  dd  0
+data1:  dd  -5,5
 ndata:  equ ($ - data1) / 4

@@ -32,7 +32,7 @@ countK:
   jmp countK
 
 writeProcess:
-  mov ecx,  buf + ndigit   ; 末尾番地
+  mov ecx,  buf + ndigit  ; 末尾番地
   mov edi,  10                ; 割る数
 
   pop eax   ; 絶対値
@@ -47,10 +47,11 @@ loop0:
 
   pop eax   ; 符号付き
   cmp eax,  0
-  jnl wp
+  jge wp
   mov dl, '-'
   mov [ecx-1], dl
   dec ecx
+  inc esi
 
 wp:
   mov eax,  4             ; write システムコール番号
