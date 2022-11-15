@@ -8,7 +8,6 @@ fib:
 	push ecx
 	push ebx
 
-	mov edi, eax
 	cmp eax, 0
 	jl not
 	jmp set
@@ -18,7 +17,8 @@ not:
 	add eax, 1		;絶対値
 	jmp set
 
-set:	
+set:
+	mov edi, eax
 	shr eax, 1
 	mov ebx, 0
 	mov ecx, 1
@@ -33,10 +33,10 @@ loop0:
 
 	test edi, 1
 	jnz mov
-	mov eax, ebx
+	mov eax, edx
 	jmp cmp
 mov:
-	mov eax, ecx
+	mov eax, esi
 	jmp cmp
 
 cmp:	
