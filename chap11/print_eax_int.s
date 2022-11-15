@@ -55,7 +55,7 @@ loop0:
 wp:
   mov eax,  4             ; write システムコール番号
   mov ebx,  1             ; 出力先番号（1=標準出力）
-  add esi,  2             ; 改行を含めた長さ
+  add esi,  1             ; 改行を含めた長さ
   mov edx,  esi           ; 改行を含めた長さ
   int 0x80
 
