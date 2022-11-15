@@ -9,6 +9,7 @@ print_eax_int:
   push edx
   push edi
   push esi
+  push eax
   push eax    ; 符号付き
 
   cmp eax,  0
@@ -49,7 +50,7 @@ loop0:
   cmp eax,  0
   jge wp
   mov dl, '-'
-  mov [ecx-1], dl
+  mov [ecx - 1], dl
   dec ecx
   inc esi                 ; 桁数
 
@@ -60,6 +61,7 @@ wp:
   mov edx,  esi           ; 改行を含めた長さ
   int 0x80
 
+  pop eax
   pop esi
   pop edi
   pop edx
