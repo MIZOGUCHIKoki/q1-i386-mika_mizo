@@ -51,7 +51,7 @@ loop0:
   mov dl, '-'
   mov [ecx-1], dl
   dec ecx
-  inc esi
+  inc esi                 ; 桁数
 
 wp:
   mov eax,  4             ; write システムコール番号
