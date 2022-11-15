@@ -24,11 +24,14 @@ set:
 	mov ecx, 1
 
 loop0:
+	cmp eax, 0
+	jle mov0
 	ADD EBX, ECX
 	ADD ECX, EBX
 	dec eax
-	jnz loop0
+	jmp loop0
 
+mov0:	
 	test edi, 1
 	jnz mov
 	mov eax, ebx
