@@ -9,7 +9,7 @@ max_abs:
 
 
   mov eax,    0       ; 最大値
-;
+  mov edi,    ebx
 loop0:
   cmp ecx,    0       ; esi ? 0
   je  endp            ; esi == 0 -> endp
@@ -30,10 +30,12 @@ then:
   jmp loop0
   maxx:
     mov eax,    [ebx]   ;
+    mov edi,    ebx
     add ebx,    4
     jmp loop0
 
 endp:
+  mov eax,  [edi]
   pop ebx
   pop ecx
   pop edx

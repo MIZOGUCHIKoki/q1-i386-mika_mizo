@@ -5,16 +5,17 @@
   extern  print_eax
 
 _start:
-  mov eax, -12
+  ;mov eax, -12
 
-  ;mov ebx,  data1
-  ;mov ecx,  ndata
-  call  print_eax_int
-  mov eax,  0
-  call  print_eax_int
+  mov ebx,  data1
+  mov ecx,  ndata
+  ;call  print_eax_int
+  ;mov eax,  0xffffffff
+  ;call  print_eax_int
+  ;call  print_eax_int
 
-  ;call  max_abs
-  ;call  print_eax
+  call  max_abs
+  call  print_eax_int
 
   mov eax,  1
   mov ebx,  0
