@@ -17,19 +17,18 @@ loop0:
 
   mov esi,  [ebx]
   cmp esi,  0
-  jg  then
+  jge  then
   mov edx,  0x00000000
   sub edx,  esi
-  mov eax,  edx
+  mov esi,  edx       ; not esi , inc esi
 
-  
 then:
-  cmp eax,    [ebx]   ; ebx ? esi
+  cmp eax,    esi  ; ebx ? esi
   jl maxx            ; ebx >= [data1]
   add ebx,    4
   jmp loop0
   maxx:
-    mov eax,    [ebx]   ;
+    mov eax,    esi
     mov edi,    ebx
     add ebx,    4
     jmp loop0
