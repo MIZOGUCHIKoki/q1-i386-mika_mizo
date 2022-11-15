@@ -10,8 +10,8 @@ _start:
   ;mov ebx,  data1
   ;mov ecx,  ndata
   call  print_eax_int
-  ;mov eax,  -12
-  ;call  print_eax_int
+  mov eax,  0
+  call  print_eax_int
 
   ;call  max_abs
   ;call  print_eax
