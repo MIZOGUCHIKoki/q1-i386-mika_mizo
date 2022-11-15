@@ -33,10 +33,10 @@ loop0:
 
 	test edi, 1
 	jnz mov
-	mov eax, ebx
+	mov eax, edx
 	jmp cmp
 mov:
-	mov eax, ecx
+	mov eax, esi
 	jmp cmp
 
 cmp:	
