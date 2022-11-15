@@ -8,6 +8,7 @@ fib:
 	push ecx
 	push ebx
 
+	mov edi, eax
 	cmp eax, 0
 	jl not
 	jmp set
@@ -18,7 +19,6 @@ not:
 	jmp set
 
 set:
-	mov edi, eax
 	shr eax, 1
 	mov ebx, 0
 	mov ecx, 1
