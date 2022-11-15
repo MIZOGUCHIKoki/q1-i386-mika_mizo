@@ -8,6 +8,7 @@ fib:
 	push ecx
 	push ebx
 
+	mov edi, eax
 	cmp eax, 0
 	jl not
 	jmp set
@@ -18,25 +19,22 @@ not:
 	jmp set
 
 set:
-	mov edi, eax
 	shr eax, 1
 	mov ebx, 0
 	mov ecx, 1
 
 loop0:
 	ADD EBX, ECX
-	mov edx, ebx
 	ADD ECX, EBX
-	mov esi, ecx
 	dec eax
 	jnz loop0
 
 	test edi, 1
 	jnz mov
-	mov eax, edx
+	mov eax, ebx
 	jmp cmp
 mov:
-	mov eax, esi
+	mov eax, ecx
 	jmp cmp
 
 cmp:	
@@ -46,12 +44,9 @@ cmp:
 
 minus:
 	test edi, 1		
-	jnz pressed             ;ediが負 && 奇数である
-	mov esi, -1
-	imul esi
-	jmp endif
-
-pressed:	
+	jnz endif           
+	not eax
+	add eax, 1
 	jmp endif
 
 endif:
