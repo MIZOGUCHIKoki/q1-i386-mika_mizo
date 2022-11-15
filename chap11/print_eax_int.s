@@ -32,7 +32,7 @@ countK:
   jmp countK
 
 writeProcess:
-  mov ecx,  buf + ndigit + 1  ; 末尾番地
+  mov ecx,  buf + ndigit   ; 末尾番地
   mov edi,  10                ; 割る数
 
   pop eax   ; 絶対値
@@ -66,6 +66,6 @@ wp:
   pop ebx
   ret
  section .data
-buf:  db  '-'
+buf:  
       times ndigit  db  0     ; ndigitバイト領域(2^32の桁数)
       db  0x0a                ; 改行

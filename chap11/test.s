@@ -3,7 +3,7 @@
   extern  print_eax_int
 
 _start:
-  mov eax,  0xffff0000
+  mov eax,  0xffffffff
   call  print_eax_int
 
   mov eax,  1
