@@ -1,0 +1,16 @@
+AS = nasm -felf
+LD = ld -m elf_i386
+
+testf: print_eax_int.o max_abs.o fib.o test.o
+	$(LD) $+ -o $@
+
+%.o: %.s
+	$(AS) $<
+
+.PHONY: clean test
+
+clean:
+	rm -f *.o *~ *.out
+
+test: testf
+	./testf
