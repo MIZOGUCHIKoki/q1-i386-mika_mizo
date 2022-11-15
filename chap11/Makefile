@@ -1,7 +1,7 @@
 AS = nasm -felf
 LD = ld -m elf_i386
 
-testf: print_eax_int.o max_abs.o fib.o test.o
+testf: print_eax_int.o max_abs.o fib.o test.o print_eax.o
 	$(LD) $+ -o $@
 
 %.o: %.s
