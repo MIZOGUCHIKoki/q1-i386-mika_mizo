@@ -23,7 +23,7 @@ loopD:
   mov eax,  0
   shl ebx,  1
   add eax,  ebx
-  shl ebx,  3
+  shl ebx,  2
   add eax,  ebx    ;  eax * 10
 
   mov ebx,  eax
@@ -37,6 +37,7 @@ loopD:
   jne loopD
 
   inc ecx
+  inc esi
   mov dl, 0x0a
   mov [ecx], dl
 
@@ -79,11 +80,9 @@ loop0:
   inc esi
 
 wp:
-  mov ecx,  buf
-  add ecx,  0     ; 開始番地
-
   mov eax,  4
   mov ebx,  1
+  ;inc esi
   mov edx,  esi   ; 桁数　
   int 0x80
 
@@ -95,3 +94,4 @@ wp:
   ret
   section .data
 buf:  times 34  db  0
+  ;db 0x0a
