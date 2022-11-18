@@ -5,7 +5,7 @@
 
 _start:
 	mov ebx, data1
-	mov ecx, 4
+	mov ecx, ndata
 	call average
 	call print_eax_frac
   mov eax,  1
@@ -13,5 +13,5 @@ _start:
   int 0x80
 
   section .data
-data1:  dd  3, -1, -4, 1
+data1:  dd  1, 2, 3, 4
 ndata:  equ ($ - data1) / 4
