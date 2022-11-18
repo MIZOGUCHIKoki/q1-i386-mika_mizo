@@ -1,8 +1,10 @@
   section .text
   global  _start
+  extern  print_eax_frac
 
 _start:
-
+  mov eax,  0x80000000
+  call print_eax_frac
   mov eax,  1
   mov ebx,  0
   int 0x80
