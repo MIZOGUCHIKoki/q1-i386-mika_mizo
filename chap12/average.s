@@ -23,7 +23,7 @@ shift:
 	mov edx, eax
 	shl eax, 24
 	shr edx, 8
-	div edi
+	idiv edi
 
 	pop ebx
 	pop ecx
