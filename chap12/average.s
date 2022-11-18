@@ -21,6 +21,7 @@ loop0:
 	jmp loop0
 
 shift:
+	shl eax, 8
 	div edi
 
 	pop ebx
