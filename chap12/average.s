@@ -14,14 +14,15 @@ average:
 loop0:
 	cmp ecx, 0
 	je shift
-	mov dl, [ebx]
-	add eax, edx
+	add eax, [ebx]
 	add ebx, 4
 	dec ecx
 	jmp loop0
 
 shift:
-	shl eax, 8
+	mov edx, eax
+	shl eax, 24
+	shr edx, 8
 	div edi
 
 	pop ebx
