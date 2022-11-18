@@ -4,19 +4,19 @@
   extern print_eax
 
 print_eax_frac:
+  push  eax
   push  ebx
   push  ecx
   push  edx
   push  edi
   push  esi
-  push  eax
 
   mov   esi,  1 ; 桁数
   
   mov ebx,  eax
   shr ebx,  24
   cmp ebx,  128
-  jle then
+  jl then
   not eax
   inc eax
   mov edx,  0
@@ -67,7 +67,6 @@ Z_Part:
   pop eax
   shr eax,  24
   push  eax
-  push  eax
   mov edi,  10
 countK:
   mov edx,  0
@@ -87,7 +86,6 @@ loop0:
   cmp eax,  0
   jne loop0
 
-  pop eax
   pop edx
   cmp edx, 0
   jne  wp
@@ -102,12 +100,12 @@ wp:
   mov edx,  esi   ; 桁数　
   int 0x80
 
-  pop eax
   pop esi
   pop edi
   pop edx
   pop ecx
   pop ebx
+  pop eax
   ret
   section .data
 buf:  times 34  db  0
