@@ -3,7 +3,7 @@
   extern  print_eax_frac
 
 _start:
-  mov eax,  0x80000000
+  mov eax,  0x12a00000
   call print_eax_frac
   mov eax,  1
   mov ebx,  0

@@ -1,52 +1,90 @@
-  ; eax を出力
-ndigit: equ 10
   section .text
   global  print_eax_frac
+  ndigit  equ 34
+  extern print_eax
 
 print_eax_frac:
-  push ebx
-  push ecx
-  push edx
-  push edi
-  push esi
-  
-  shr eax,  16
-  cmp eax,  128
-  jl  colP
-  not eax
-  inc eax
+  push  ebx
+  push  ecx
+  push  edx
+  push  edi
+  push  esi
+  push  eax
 
-colP:
-  ; eaxの桁数をカウント
-  mov edi,  10   ; 割る数
-  mov esi,  1    ; 桁数
+  mov   esi,  1 ; 桁数
+
+D_Part: ; 少数出力
+  mov ecx,  buf
+  add ecx,  8         ; 小数部アドレス先頭番地
+  and eax,  0x00ffffff
+  mov ebx,  eax
+
+loopD:
+  mov eax,  0
+  shl ebx,  1
+  add eax,  ebx
+  shl ebx,  3
+  add eax,  ebx    ;  eax * 10
+
+  mov ebx,  eax
+  and ebx,  0x00ffffff
+  shr eax,  24
+  inc ecx
+  add al, '0'
+  mov [ecx],  al
+  inc esi
+  cmp ebx,  0
+  jne loopD
+
+  inc ecx
+  mov dl, 0x0a
+  mov [ecx], dl
+
+  mov dl, '.'
+  mov [buf + 8], dl
+  inc esi
+
+Z_Part:
+  mov ecx,  buf
+  add ecx,  8     ; 開始番地指定
+  pop eax
+  shr eax,  24
+  push  eax
+  push  eax
+  mov edi,  10
 countK:
-  mov edx,  0     
-  div edi         ; edx eax / edi = eax 1932 / 10 = 193
+  mov edx,  0
+  div edi
   cmp eax,  0
   je writeProcess
-  inc esi          ; 桁数++
+  inc esi
   jmp countK
 writeProcess:
-  mov ecx,  buf + ndigit
-  ; mov ecx,  buf + esi   ; 作業領域の末尾の次の番地
-  mov edi,  10
-  ;mov eax,  N
   pop eax
-  push eax
 loop0:
   mov edx,  0
-  dec ecx                 ; 次の書き込み先
-  div edi                 ; N / 10 = eax, mod edx
+  dec ecx
+  div edi
   add dl, '0'
-  mov [ecx], dl           ; 書き込み
+  mov [ecx],  dl
   cmp eax,  0
   jne loop0
 
-  mov eax,  4             ; write システムコール番号
-  mov ebx,  1             ; 出力先番号（1=標準出力）
-  add esi,  1             ; 改行を含めた長さ
-  mov edx,  esi           ; 改行を含めた長さ
+  pop eax
+  cmp eax,  128
+  jl  wp
+  mov dl, '-'
+  mov [ecx - 1], dl
+  dec ecx
+  inc esi
+
+wp:
+  mov ecx,  buf
+  add ecx,  0     ; 開始番地
+
+  mov eax,  4
+  mov ebx,  1
+  mov edx,  esi   ; 桁数　
   int 0x80
 
   pop esi
@@ -55,8 +93,5 @@ loop0:
   pop ecx
   pop ebx
   ret
-
-
- section .data
-buf:  times ndigit  db  0     ; ndigitバイト領域(2^32の桁数)
-      db  0x0a            ; 改行
+  section .data
+buf:  times 34  db  0
