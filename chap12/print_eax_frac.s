@@ -9,13 +9,14 @@ print_eax_frac:
   push  edx
   push  edi
   push  esi
+  push  eax
 
   mov   esi,  1 ; 桁数
   
   mov ebx,  eax
   shr ebx,  24
   cmp ebx,  128
-  jl then
+  jle then
   not eax
   inc eax
   mov edx,  0
@@ -101,6 +102,7 @@ wp:
   mov edx,  esi   ; 桁数　
   int 0x80
 
+  pop eax
   pop esi
   pop edi
   pop edx
@@ -109,4 +111,3 @@ wp:
   ret
   section .data
 buf:  times 34  db  0
-  ;db 0x0a
