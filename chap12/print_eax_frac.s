@@ -9,9 +9,24 @@ print_eax_frac:
   push  edx
   push  edi
   push  esi
-  push  eax
 
   mov   esi,  1 ; 桁数
+  
+  mov ebx,  eax
+  shr ebx,  24
+  cmp ebx,  128
+  jl then
+  not eax
+  inc eax
+  mov edx,  0
+  push  edx
+  push  eax
+  jmp D_Part
+
+  then:
+    mov edx,  1
+    push  edx
+    push  eax
 
 D_Part: ; 少数出力
   mov ecx,  buf
@@ -72,8 +87,9 @@ loop0:
   jne loop0
 
   pop eax
-  cmp eax,  128
-  jl  wp
+  pop edx
+  cmp edx, 0
+  jne  wp
   mov dl, '-'
   mov [ecx - 1], dl
   dec ecx
@@ -82,7 +98,6 @@ loop0:
 wp:
   mov eax,  4
   mov ebx,  1
-  ;inc esi
   mov edx,  esi   ; 桁数　
   int 0x80
 
