@@ -1,6 +1,5 @@
 	section .text
 	global cos
-  extern print_eax_frac
 
 cos:
 	push  esi
