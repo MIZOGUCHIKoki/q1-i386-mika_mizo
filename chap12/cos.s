@@ -25,11 +25,14 @@ pr:
   push  edi
   sub ecx,  eax   ; pi - x
   mov eax,  ecx   ; eax = pi - x :: in'
+  jmp cos_eax
 pr1:
-  ;; in' / 2
-  shr eax,  1   ; eax / 2 :: in' / 2
+  mov edi,  0
+  push  edi
 
 cos_eax:
+  ;; in' / 2
+  shr eax,  1   ; eax / 2 :: in' / 2
   ; x^2/2!
   mul eax      ; in * in = edx eax
   mov ebx,  0x02000000  ; 
@@ -60,6 +63,7 @@ cos_eax:
   div ebx
   mov ebx,  0x01000000  ; 1 [8.24]
   sub eax,  ebx
+
   pop edi
   cmp edi,  1
   jne endp
