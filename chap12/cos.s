@@ -8,6 +8,7 @@ cos:
 	push  ecx
 	push  ebx
 
+  ;abs|eax|
   mov esi,  0x01000000
   cmp eax,  0
   jge pr
@@ -17,7 +18,7 @@ cos:
 pr:
   ; x^2/2!
   mul eax      ; in * in = edx eax
-  mov ebx,  0x02000000  ; 除数 8.24
+  mov ebx,  0x02000000  ; 
   div ebx      ; edx eax / ebx = eax
   sub esi,  eax
   push  eax
@@ -41,7 +42,7 @@ endp:
   mov eax,  esi
   pop ebx
   pop ecx
-  pop edi
+  pop edx
   pop edi
   pop esi
   ret
