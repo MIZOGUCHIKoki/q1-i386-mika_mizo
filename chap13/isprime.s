@@ -6,10 +6,11 @@ isprime:
 	push edi
 	push ebx
 
-	mov eax, [esp+4]
+
 	mov ebx, eax
 	mov ecx, 1000
-
+	cmp eax, 0
+	je nextstep
 loop0:
 	cmp ecx, 0
 	je nextstep
