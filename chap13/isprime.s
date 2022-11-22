@@ -2,13 +2,14 @@
 	global isprime
 
 isprime:
+	push ebp
 	push esi
 	push edi
 	push ebx
 
-	mov eax, [esp+16]
+	mov eax, [esp+20]
 	mov ebx, eax
-	mov ecx, 1000
+	mov ecx, 100
 	cmp eax, 2
 	jl notprime
 loop0:
@@ -51,5 +52,6 @@ pop:
 	pop ebx
 	pop edi
 	pop esi
+	pop ebp
 	ret
 	
