@@ -4,8 +4,13 @@ LDFLAGS = -m elf_i386
 CC = gcc
 CFLAGS = -m32 -W -Wall
 
-makefile: isprime.o isprimec.o sort.s sortc.c
-	$(CC) $(CFLAGS) $+
+make: sort isprime
+
+sort: sort.s sortc.c
+	$(CC) $(CFLAGS) $+ -o $@
+
+isprime: isprime.s isprimec.c
+	$(CC) $(CFLAGS) $+ -o $@
 
 %.o: %.s
 	$(AS) $<
@@ -18,6 +23,7 @@ makefile: isprime.o isprimec.o sort.s sortc.c
 clean:
 	rm -f *.o *~ *.out 
 
-test:	makefile
-	./a.out | cat -v
+test: sort isprime
+	./sort 		
+	./isprime 
 
