@@ -1,5 +1,6 @@
 	section .text
 	global isprime
+	extern print_eax
 
 isprime:
 	push ebp
@@ -9,7 +10,7 @@ isprime:
 
 	mov eax, [esp+20]
 	mov ebx, eax
-	mov ecx, 1000
+	mov ecx, 10000
 	cmp eax, 2
 	jl notprime
 loop0:
@@ -25,6 +26,7 @@ loop0:
 	jmp loop0
 
 nextstep:
+	call print_eax
 	mov ecx, eax
 	jmp loop1
 
