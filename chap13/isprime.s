@@ -1,6 +1,5 @@
 	section .text
 	global isprime
-	extern print_eax
 
 isprime:
 	push ebp
@@ -26,7 +25,6 @@ loop0:
 	jmp loop0
 
 nextstep:
-	call print_eax
 	mov ecx, eax
 	jmp loop1
 
