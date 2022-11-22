@@ -6,10 +6,10 @@ CFLAGS = -m32 -W -Wall
 
 make: sort isprime
 
-sort: sort.s sortc.c
+sort: sort.o sortc.o
 	$(CC) $(CFLAGS) $+ -o $@
 
-isprime: isprime.s isprimec.c
+isprime: isprime.o isprimec.o
 	$(CC) $(CFLAGS) $+ -o $@
 
 %.o: %.s
