@@ -29,13 +29,13 @@ nextstep:
 	jmp loop1
 
 loop1:
-	cmp edx, 0
-	je notprime
 	mov eax, ebx
 	cmp ecx, 1
 	je prime
 	mov edx, 0
 	div ecx
+	cmp edx, 0
+	je notprime
 	dec ecx
 	jmp loop1
 
