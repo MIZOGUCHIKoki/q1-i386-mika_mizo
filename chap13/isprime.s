@@ -20,7 +20,6 @@ loop0:
 	mul eax
 	add eax, ebx
 	shl edi, 1
-	mov edx, 0
 	div edi
 	dec ecx
 	jmp loop0
