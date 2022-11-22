@@ -9,7 +9,7 @@ isprime:
 
 	mov eax, [esp+20]
 	mov ebx, eax
-	mov ecx, 10000
+	mov ecx, 9000
 	cmp eax, 2
 	jl notprime
 loop0:
