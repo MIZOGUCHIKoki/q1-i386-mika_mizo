@@ -33,8 +33,8 @@ loop0:
   mov   edi,  esi ; edi = sot :: j
 
   loop1:
-    cmp   edi,  ecx   ; j > i?
-    jg    swap
+    cmp   edi,  ecx   ; j <= i?
+    jg    swap        ; j > i -> swap
     
     push  esi
     mov   esi,  [ebx + edi*4] ; data[j]
@@ -47,7 +47,7 @@ loop0:
       mov eax,  edi           ; max_index = j
     endif:
       pop esi
-      inc edi
+      add edi,  esi
       jmp loop1
 
   swap:
@@ -59,7 +59,7 @@ loop0:
     mov   [ebx + ecx*4],  esi   ; data[i] = m
     pop edi
     pop esi
-    dec   ecx
+    sub ecx,  esi
     jmp   loop0
 	
 endp:
