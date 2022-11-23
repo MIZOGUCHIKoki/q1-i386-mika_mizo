@@ -1,25 +1,25 @@
   section .text
   global  sort
 sort:
-	push  esi
-	push  edi
-	push  edx
-  push  ecx
-  push  ebx
-  push  eax
   
-  ;; ---入力データを整理---
-  mov ebx,  [esp + 4] ; data
+  ;; ---processing input data---
+  mov edx,  [esp + 4] ; data
   mov ecx,  [esp + 8] ; length
   mov eax,  [esp + 12]; sot       ; width
+	push  esi
+	push  edi
+  push  ebx
+  push  esp
+  push  ebp
+  mov ebx,  edx
   mov esi,  4
   mov edx,  0
   div esi   ; edx eax / esi = eax
   mov esi,  eax
   ;; ---
-  ;; ebx  : 先頭番地
-  ;; ecx  : データ個数
-  ;; esi  : 構造体データ個数
+  ;; ebx  : header address.
+  ;; ecx  : number of data in array.
+  ;; esi  : number of data in struct.
 
   mov   eax,  0 ; max_index
   mov   edx,  0 ; max
@@ -63,10 +63,9 @@ loop0:
     jmp   loop0
 	
 endp:
-  pop eax
+  pop ebp
+  pop esp
   pop ebx
-  pop ecx
-	pop edx
 	pop edi
 	pop esi
 	ret
