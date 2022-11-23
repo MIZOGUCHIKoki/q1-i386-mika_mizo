@@ -21,12 +21,23 @@ sort:
   ;; ecx  : number of data in array.
   ;; esi  : number of data in struct.
 
+  ;; ecx = data.length
+  push  ebx
+  mov eax,  ecx   ;
+  mov edx,  0
+  mov edx,  esi   ; length * width/4
+  mul esi         ; eax * ecx = edx eax
+  mov ebx,  1
+  div ebx         ; edx eax / 1 = eax
+  mov ecx,  eax   ; ecx = data.length
+  pop ebx
+  
   mov   eax,  0 ; max_index
   mov   edx,  0 ; max
   sub   ecx,  esi   ; i = length - sot
 loop0:
-  cmp   ecx,  0 ; ecx = i
-  jle   endp
+  cmp   ecx,  0 ; ecx :: i
+  jle   endp    ; if ecx <= 0 then jmp to endp
   mov   edx,  [ebx]   ; max = data[0]
   mov   eax,  0       ; max_indent = 0
 
@@ -51,14 +62,27 @@ loop0:
       jmp loop1
 
   swap:
-    push esi
     push edi
-    mov   esi,  [ebx + eax*4]   ; m = data[max_index]
-    mov   edi,  [ebx + ecx*4]   ; edi = data[i]
-    mov   [ebx + eax*4],  edi   ; data[max_index],  data[i]
-    mov   [ebx + ecx*4],  esi   ; data[i] = m
-    pop edi
-    pop esi
+    push edx
+    push ebx
+    mov edx,  0
+    sub ebx,  4
+    swap_loop:
+      cmp edx,  esi
+      jge endswap   ; if k >= sot then jmp to endswap
+      push esi
+      add ebx,  4
+      mov   esi,  [ebx + eax*4]   ; m = data[max_index]
+      mov   edi,  [ebx + ecx*4]   ; edi = data[i]
+      mov   [ebx + eax*4],  edi   ; data[max_index],  data[i]
+      mov   [ebx + ecx*4],  esi   ; data[i] = m
+      pop esi
+      inc edx
+      jmp swap_loop
+    endswap:
+      pop ebx
+      pop edx
+      pop edi
     sub ecx,  esi
     jmp   loop0
 	
@@ -68,4 +92,4 @@ endp:
   pop ebx
   pop edi
   pop esi
-	ret
+  ret
