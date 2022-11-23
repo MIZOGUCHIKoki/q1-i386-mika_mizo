@@ -6,8 +6,8 @@ sort:
   mov edx,  [esp + 4] ; data
   mov ecx,  [esp + 8] ; length
   mov eax,  [esp + 12]; sot       ; width
-	push  esi
-	push  edi
+  push  esi
+  push  edi
   push  ebx
   push  esp
   push  ebp
@@ -66,6 +66,6 @@ endp:
   pop ebp
   pop esp
   pop ebx
-	pop edi
-	pop esi
+  pop edi
+  pop esi
 	ret
