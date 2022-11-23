@@ -11,6 +11,7 @@ class sort {
                 System.out.print(", ");
             }
         }
+        System.out.println();
     }
 
     public static void sort() {
